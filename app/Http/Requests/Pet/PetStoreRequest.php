@@ -29,7 +29,7 @@ class PetStoreRequest extends FormRequest
             'age' => ['nullable', 'integer'],
             'gender' => ['nullable', 'string', 'max:255'],
             'client_id' => ['required', 'integer'],
-            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:1024'],
+            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg'],
         ];
     }
 }

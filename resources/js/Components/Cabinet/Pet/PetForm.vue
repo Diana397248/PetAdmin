@@ -31,7 +31,7 @@
                             v-model="model.breed"
                             :rules="rules.breed"
                             label="порода"/>
-                        <v-text-field
+                        <v-number-input
                             v-model="model.age"
                             :rules="rules.age"
                             label="возраст"/>
@@ -49,7 +49,7 @@ import ImageInput from "@/Components/Cabinet/Base/ImageInput.vue"
 import AddPetBtn from "@/Components/Cabinet/Base/AddPetBtn.vue"
 
 import {reactive, ref, watch} from 'vue'
-// import {http, upload} from "@/axios/index.js";
+import {toast} from "vue3-toastify";
 
 const emmit = defineEmits([
     'close',
@@ -58,27 +58,56 @@ const emmit = defineEmits([
 
 const createPet = () => {
     const pet = {
+        //TODO:
+        species_id: 1,
+        client_id: 1,
+        breed_id: 1,
+
         "name": model.name,
         "type": model.type,
-        "species": model.breed,
-        "year_birth": model.age,
+        "age": model.age,
         "gender": model.gender,
+        "photo": model.img,
     }
-        // console.log(model.img.file)
-        // upload(model.img.file, null, 'img', '/api/pets', (formData) => {
-        //   for (let key in pet) {
-        //     formData.append(key, pet[key]);
-        //   }
-        // })
+    const formData = new FormData();
+    formData.append('name', pet.name);
+    formData.append('species_id', pet.species_id);
+    formData.append('breed_id', pet.breed_id);
+    formData.append('age', pet.age);
+    formData.append('gender', pet.gender);
+    if (pet.photo && pet.photo.file instanceof File) {
+        formData.append('photo', pet.photo.file);
+    }
+    formData.append('client_id', pet.client_id);
+
+    axios.post('/pets/store', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
         .then((res) => {
             if (res.status === 201) {
                 emmit('updatePets')
+                resetForm();
+
+                emmit('close')
+                toast.success('Питомец успешно создан!');
+
             }
 
         })
         .catch((error) => {
             console.log(error)
         })
+}
+
+const resetForm = () => {
+    model.name = "";
+    model.type = "";
+    model.gender = "";
+    model.breed = "";
+    model.age = "";
+    model.img = "";
 }
 
 const avatar = ref(

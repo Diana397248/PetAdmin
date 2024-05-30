@@ -8,7 +8,7 @@
                     <!--                    TODO:                         "text-btn="Изменить"/>
                     -->
                     <Picture
-                        :img="getFileUrl(props.pet.img)"/>
+                        :img="props.pet.photo"/>
                 </v-col>
 
                 <v-col class="d-flex flex-column gap-5">
@@ -51,8 +51,6 @@ import CardAnalysis from "@/Components/Cabinet/Pet/CardAnalysis.vue"
 import Picture from "@/Components/Cabinet/Picture.vue"
 import Field from "@/Components/Cabinet/Field.vue"
 // import {getFileUrl} from "@/axios/index.js"/
-//TODO ПОЛУЧАТЬ С БЕКА
-const getFileUrl = (x) => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt'
 const props = defineProps({
     pet: Object
 })
