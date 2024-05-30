@@ -5,18 +5,19 @@
 
 
                 <v-col class="d-flex flex-column">
+                    <!--                    TODO:                         "text-btn="Изменить"/>
+                    -->
                     <Picture
-                        :img="getFileUrl(props.pet.img)"
-                        text-btn="Изменить"/>
+                        :img="getFileUrl(props.pet.img)"/>
                 </v-col>
 
                 <v-col class="d-flex flex-column gap-5">
                     <p class="pet-name">{{ props.pet.name }}</p>
                     <div>
-                        <Field label="тип" :text="props.pet.type"/>
-                        <Field label="порода" :text="props.pet.species"/>
-                        <Field label="возраст" :text="props.pet.year_birth"/>
-                        <Field label="пол" :text="props.pet.gender"/>
+                        <Field label="тип" :text="props.pet?.breed?.name"/>
+                        <Field label="порода" :text="props.pet?.species?.name"/>
+                        <Field label="возраст" :text="props.pet?.age"/>
+                        <Field label="пол" :text="props.pet?.gender"/>
                     </div>
                 </v-col>
 
@@ -50,6 +51,7 @@ import CardAnalysis from "@/Components/Cabinet/Pet/CardAnalysis.vue"
 import Picture from "@/Components/Cabinet/Picture.vue"
 import Field from "@/Components/Cabinet/Field.vue"
 // import {getFileUrl} from "@/axios/index.js"/
+//TODO ПОЛУЧАТЬ С БЕКА
 const getFileUrl = (x) => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt'
 const props = defineProps({
     pet: Object

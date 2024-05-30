@@ -73,7 +73,7 @@ const fetchAllAppointments = async () => {
     const response = await axios.get('/appointments/fetchAllAppointments');
     calendarOptions.value.events = response.data.map((appointment) => {
         let end = new Date(appointment.start_time);
-        end.setMinutes(end.getMinutes()+30)
+        // TODO end.setMinutes(end.getMinutes()+30)
         return ({
             id: appointment.id,
             start:  new Date(appointment.start_time),
@@ -116,7 +116,7 @@ onMounted(async () => {
                 Встречи
             </h2>
         </template>
-        <p>xxx{{ JSON.stringify(calendarOptions.events) }}</p> TODO
+<!--        <p>xxx{{ JSON.stringify(calendarOptions.events) }}</p> TODO-->
         <div class="rounded-xl">
             <FullCalendar :options="calendarOptions"/>
         </div>

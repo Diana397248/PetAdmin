@@ -16,5 +16,8 @@ class VetSeeder extends Seeder
         Vet::factory()->create([
             'user_id' => 1,
         ]);
+        Vet::factory()->create([
+            'user_id' => 2,
+        ]);
     }
 }

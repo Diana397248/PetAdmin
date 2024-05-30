@@ -16,10 +16,11 @@ import {onMounted, ref} from "vue";
 const myPets = ref([])
 
 const getMyPets = () => {
-    // http.get('/api/pets')
-    //     .then((res) => {
-    //       myPets.value = res.data
-    //     })
+    //todo возращает пагинацию
+    axios.get('/pets/fetchAllPets?page=1')
+        .then((res) => {
+          myPets.value = res.data.pets.data
+        })
 }
 
 onMounted(() => {
