@@ -11,14 +11,18 @@ class Appointment extends Model
 
     protected $fillable = [
         'client_id',
+        'vet_id',
         'title',
         'description',
         'start_time',
-        'end_time'
     ];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+    public function vet()
+    {
+        return $this->belongsTo(Vet::class);
     }
 }

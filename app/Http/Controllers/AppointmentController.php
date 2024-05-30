@@ -29,7 +29,7 @@ class AppointmentController extends Controller
         return response()->json([
             'message' => 'Event created successfully',
         ], 201);
-    }    
+    }
 
     public function fetchAllAppointments() {
         $appointments = $this->appointmentService->fetchAllAppointments();
@@ -42,6 +42,13 @@ class AppointmentController extends Controller
         $users = $this->appointmentService->fetchAllClients();
 
         return response()->json($users);
+    }
+
+    public function fetchAllVets()
+    {
+        $vets = $this->appointmentService->fetchAllVets();
+
+        return response()->json($vets);
     }
 
     public function searchClients(Request $request)

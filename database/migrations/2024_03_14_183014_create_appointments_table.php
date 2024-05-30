@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
-            $table->string('title', 255);
+            $table->unsignedBigInteger('vet_id');
             $table->text('description')->nullable();
             $table->dateTime('start_time');
-            $table->dateTime('end_time');
             $table->timestamps();
 
+            $table->foreign('vet_id')->references('id')->on('vets');
             $table->foreign('client_id')->references('id')->on('clients');
         });
     }

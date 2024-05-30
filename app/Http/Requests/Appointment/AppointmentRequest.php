@@ -23,11 +23,10 @@ class AppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
             'client_id' => 'required|integer|exists:clients,id',
+            'vet_id' => 'required|integer|exists:vets,id',
             'description' => 'nullable|string',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
+            'start_time' => 'required|date|after:today',
         ];
     }
 }

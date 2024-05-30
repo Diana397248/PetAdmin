@@ -6,14 +6,17 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import {errors} from '@/Validation/Appointments/Index'
 import CreateModal from './Partials/CreateModal.vue'
-import EditModal from './Partials/EditModal.vue'
 import esLocale from "@fullcalendar/core/locales/ru";
 
 const selectedCreateClient = ref([])
+const selectedCreateVet = ref([])
 const selectedEditClient = ref([])
 const isCreateModalOpen = ref(false)
 const isEditModalOpen = ref(false)
+
 const matchingClients = ref([]);
+const matchingVets = ref([]);
+
 const editData = ref({})
 
 const openCreateModal = () => {
@@ -54,7 +57,7 @@ const calendarOptions = ref({
     },
     customButtons: {
         addEvent: {
-            text: 'Записаться',
+            text: 'Записать',
             click: () => {
                 openCreateModal();
             }
@@ -68,14 +71,15 @@ const calendarOptions = ref({
 
 const fetchAllAppointments = async () => {
     const response = await axios.get('/appointments/fetchAllAppointments');
-    const events = response.data.map((appointment) => ({
-        id: appointment.id,
-        title: appointment.title,
-        start: new Date(appointment.start_time),
-        end: new Date(appointment.end_time),
-        description: appointment.description
-    }));
-    calendarOptions.value.events = events;
+    calendarOptions.value.events = response.data.map((appointment) => {
+
+        return ({
+            id: appointment.id,
+            date:  new Date(appointment.start_time),
+            description: appointment.description
+            // todo client
+        })
+    });
 };
 
 const fetchAllClients = async () => {
@@ -83,9 +87,19 @@ const fetchAllClients = async () => {
     matchingClients.value = response.data;
 };
 
+const fetchAllVets = async () => {
+    const response = await axios.get('/appointments/fetchAllVets');
+    matchingVets.value = response.data;
+};
+
 const searchClients = async (query) => {
     const response = await axios.get('/appointments/searchClients', {params: {query}});
     matchingClients.value = response.data;
+};
+
+const searchVets = async (query) => {
+    const response = await axios.get('/appointments/searchVets', {params: {query}});
+    matchingVets.value = response.data;
 };
 
 onMounted(async () => {
@@ -100,29 +114,47 @@ onMounted(async () => {
                 Встречи
             </h2>
         </template>
-
+        <p>xxx{{ JSON.stringify(calendarOptions.events) }}</p> TODO
         <div class="rounded-xl">
             <FullCalendar :options="calendarOptions"/>
         </div>
 
-        <CreateModal :isCreateModalOpen="isCreateModalOpen"
-                     @closeCreateModal="closeCreateModal"
-                     :calendarOptions="calendarOptions"
-                     :selectedClient="selectedCreateClient"
-                     :fetchAllAppointments="fetchAllAppointments"
-                     :fetchAllClients="fetchAllClients"
-                     :searchClients="searchClients"
-                     :matchingClients="matchingClients"/>
+        <CreateModal
+            :isCreateModalOpen="isCreateModalOpen"
+            @closeCreateModal="closeCreateModal"
+            :calendarOptions="calendarOptions"
+            :fetchAllAppointments="fetchAllAppointments"
 
-        <EditModal :isEditModalOpen="isEditModalOpen"
-                   @closeEditModal="closeEditModal"
-                   :calendarOptions="calendarOptions"
-                   :selectedClient="selectedEditClient"
-                   :fetchAllAppointments="fetchAllAppointments"
-                   :fetchAllClients="fetchAllClients"
-                   :searchClients="searchClients"
-                   :matchingClients="matchingClients"
-                   :editData="editData"/>
+            :selectedClient="selectedCreateClient"
+            :selectedVet="selectedCreateVet"
+
+            :fetchAllClients="fetchAllClients"
+            :fetchAllVets="fetchAllVets"
+
+            :searchClients="searchClients"
+            :searchVets="searchVets"
+
+            :matchingClients="matchingClients"
+            :matchingVets="matchingVets"
+        />
+
+        <!--        <EditModal :isEditModalOpen="isEditModalOpen"-->
+        <!--                   @closeEditModal="closeEditModal"-->
+        <!--                   :calendarOptions="calendarOptions"-->
+        <!--                   :selectedClient="selectedEditClient"-->
+        <!--                   :fetchAllAppointments="fetchAllAppointments"-->
+
+        <!--                   :fetchAllClients="fetchAllClients"-->
+        <!--                   :fetchAllVets="fetchAllVets"-->
+
+        <!--                   :searchClients="searchClients"-->
+        <!--                   :searchVets="searchVets"-->
+
+        <!--                   :matchingClients="matchingClients"-->
+        <!--                   :matchingVets="matchingVets"-->
+
+        <!--                   :editData="editData"-->
+        <!--        />-->
 
 
     </AppLayout>

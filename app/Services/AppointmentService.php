@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\Vet;
 
 class AppointmentService
 {
@@ -14,12 +15,12 @@ class AppointmentService
 
     public function fetchAllAppointments()
     {
-        return Appointment::with('client')->get();
+        return Appointment::with('client')->with('vet')->get();
     }
 
     public function fetchAppointmentById($id)
     {
-        return Appointment::with('client')->find($id);
+        return Appointment::with('client')->with('vet')->findOrFail($id);
     }
 
     public function updateAppointment($id, $data)
@@ -41,6 +42,11 @@ class AppointmentService
     public function fetchAllClients($limit = 10)
     {
         return Client::orderBy('id')->limit($limit)->get();
+    }
+
+    public function fetchAllVets($limit = 10)
+    {
+        return Vet::orderBy('id')->limit($limit)->with('user')->get();
     }
 
     public function searchClients($query, $limit = 10)

@@ -1,15 +1,3 @@
-cd C:\Users\Diana\Downloads\PetCare C:
-
-```php artisan serve```
-```php artisan make:model NameModel -mfs```
-```
-php artisan make:controller NameController --resource
-php artisan migrate
-```
-
-npm run build npm run dev
-
-```
 php artisan migrate:fresh --seed
 php artisan db:seed --class=SpeciesSeeder
 php artisan db:seed --class=BreedsSeeder
@@ -20,4 +8,3 @@ php artisan db:seed --class=BreedsSeeder
 php artisan db:seed --class=PetsSeeder
 php artisan db:seed --class=ItemsSeeder
 php artisan db:seed --class=VetSeeder
-```
