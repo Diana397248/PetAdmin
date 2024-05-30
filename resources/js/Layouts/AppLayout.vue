@@ -51,9 +51,10 @@ const logout = () => {
                             <span class="sr-only">Toggle sidebar</span>
                         </button>
                         <a href="/dashboard" class="flex items-center justify-between mr-4">
-                            <img src="/img/logo.png" class="mr-3" alt="Flowbite Logo"/>
+                            <img src="/assets/logo.png" style="width:40px; height:40px;" class="mr-3"
+                                 alt="Flowbite Logo"/>
                             <span
-                                class="self-center text-2xl text-indigo-900 font-semibold whitespace-nowrap dark:text-white">Pet Care</span>
+                                class="self-center text-2xl text-indigo-900 font-semibold whitespace-nowrap dark:text-white">Айболит админ</span>
                         </a>
                     </div>
                     <div class="flex items-center lg:order-2">

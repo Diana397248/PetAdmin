@@ -1,6 +1,6 @@
 <template>
     <ClientLayout title="Items">
-        <v-row>
+        <v-row class="d-flex justify-center mb-10">
             <Calendars/>
         </v-row>
     </ClientLayout>
