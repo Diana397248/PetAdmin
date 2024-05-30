@@ -25,3 +25,5 @@ database/seeders/UserSeeder.php
 node_modules/*
 vendor/*
 .idea/*
+
+public/build/*
