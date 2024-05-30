@@ -10,15 +10,15 @@ class Appointment extends Model
     use HasFactory;
 
     protected $fillable = [
-		'client_id',
-    'title',
-    'description',
-    'start_time',
-    'end_time'
-	];
+        'client_id',
+        'title',
+        'description',
+        'start_time',
+        'end_time'
+    ];
 
-  public function client()
-  {
-      return $this->belongsTo(Client::class);
-  }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

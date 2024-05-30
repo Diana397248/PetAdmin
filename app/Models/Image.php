@@ -13,7 +13,7 @@ class Image extends Model
     protected $table = "images";
 
     public function pet(): BelongsTo
-	{
-		return $this->belongsTo(Pet::class);
-	}
+    {
+        return $this->belongsTo(Pet::class);
+    }
 }

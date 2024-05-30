@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Str;
+use Illuminate\Support\Str;
 
 class Client extends Model
 {
@@ -36,12 +36,12 @@ class Client extends Model
     }
 
     public function pets(): HasMany
-	{
-		return $this->hasMany(Pet::class);
-	}
+    {
+        return $this->hasMany(Pet::class);
+    }
 
     public function appointments(): HasMany
-	{
-		return $this->hasMany(Appointment::class);
-	}
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

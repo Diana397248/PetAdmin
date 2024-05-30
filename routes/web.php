@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\SurgicalHistoryController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\PetController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CabinetController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\MedicationController;
-use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\SurgicalHistoryController;
+use App\Http\Controllers\VaccinationController;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ Route::middleware([
     Route::get('/clients/{slug}/edit', [ClientController::class, 'edit'])->name('clients.edit');
     Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
     Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
-    
+
     // Pets
     Route::get('/pets', [PetController::class, 'index'])->name('pets');
     Route::get('/pets/create', [PetController::class, 'create'])->name('pets.create');
@@ -111,4 +111,43 @@ Route::middleware([
     Route::get('/items/{slug}/edit', [ItemController::class, 'edit'])->name('items.edit');
     Route::put('/items/{id}', [ItemController::class, 'update'])->name('items.update');
     Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
+
+    // cabinet
+    Route::get('/cabinet', [CabinetController::class, 'index'])->name('cabinet');
+
+
+    // TODO REMOVE
+    Route::get('/test', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('HomePage');
+
+    Route::get('/test2', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('UserProfile');
+
+    Route::get('/test3', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('Calendars');
+
+    Route::get('/test4', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('CategoryPage');
+
+    Route::get('/test5', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('UserForm');
+
+    Route::get('/test6', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('HomePage');
+
+    Route::get('/test7', function () {
+        return Inertia::render('Cabinet/Index');
+    })->name('HomePage');
+});
+
+
+
+Route::get('/csrf-token', function () {
+    return csrf_token();
 });

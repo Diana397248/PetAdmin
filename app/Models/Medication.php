@@ -10,18 +10,18 @@ class Medication extends Model
 {
     use HasFactory;
 
-	protected $fillable = [
-		'pet_id',
-		'medication_name',
-		'administered_at',
-		'dosage',
-		'frequency',
-		'administering_veterinarian',
-		'notes',
-	];
+    protected $fillable = [
+        'pet_id',
+        'medication_name',
+        'administered_at',
+        'dosage',
+        'frequency',
+        'administering_veterinarian',
+        'notes',
+    ];
 
-	public function pet(): BelongsTo
-	{
-		return $this->belongsTo(Pet::class);
-	}
+    public function pet(): BelongsTo
+    {
+        return $this->belongsTo(Pet::class);
+    }
 }
