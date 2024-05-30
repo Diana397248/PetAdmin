@@ -114,6 +114,7 @@ Route::middleware([
 
     // cabinet
     Route::get('/cabinet', [CabinetController::class, 'index'])->name('cabinet');
+    Route::get('/cabinet/calendars', [CabinetController::class, 'calendars'])->name('Calendars');
 
 
     // TODO REMOVE
@@ -125,9 +126,6 @@ Route::middleware([
         return Inertia::render('Cabinet/Index');
     })->name('UserProfile');
 
-    Route::get('/test3', function () {
-        return Inertia::render('Cabinet/Index');
-    })->name('Calendars');
 
     Route::get('/test4', function () {
         return Inertia::render('Cabinet/Index');
@@ -145,7 +143,6 @@ Route::middleware([
         return Inertia::render('Cabinet/Index');
     })->name('HomePage');
 });
-
 
 
 Route::get('/csrf-token', function () {
