@@ -72,10 +72,12 @@ const calendarOptions = ref({
 const fetchAllAppointments = async () => {
     const response = await axios.get('/appointments/fetchAllAppointments');
     calendarOptions.value.events = response.data.map((appointment) => {
-
+        let end = new Date(appointment.start_time);
+        end.setMinutes(end.getMinutes()+30)
         return ({
             id: appointment.id,
-            date:  new Date(appointment.start_time),
+            start:  new Date(appointment.start_time),
+            end:  end,
             description: appointment.description
             // todo client
         })

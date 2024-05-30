@@ -15,7 +15,7 @@ class AppointmentService
 
     public function fetchAllAppointments()
     {
-        return Appointment::with('client')->with('vet')->get();
+        return Appointment::with('client')->with('vet')->with('vet.user')->get();
     }
 
     public function fetchAppointmentById($id)

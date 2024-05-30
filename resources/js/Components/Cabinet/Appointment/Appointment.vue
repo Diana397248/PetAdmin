@@ -14,10 +14,12 @@ import {onMounted, ref} from "vue";
 const appointments = ref([])
 
 const getAppointments = () => {
-    // http.get('/api/appointments')
-    //     .then((res) => {
-    //       appointments.value = res.data
-    //     })
+
+    axios.get('/appointments/fetchAllAppointments')
+        .then((res) => {
+
+          appointments.value = res.data
+        })
 }
 
 onMounted(() => {
