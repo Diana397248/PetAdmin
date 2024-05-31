@@ -15,7 +15,7 @@ class AppointmentService
 
     public function fetchAllAppointments()
     {
-        return Appointment::with('client')->with('vet')->with('vet.user')->get();
+        return Appointment::with('client')->with('vet')->with('vet.user')->orderBy('start_time', 'ASC')->get();
     }
 
     public function fetchAppointmentById($id)
