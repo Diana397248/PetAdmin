@@ -59,7 +59,9 @@ class PetService
     public function fetchAllPets($page)
     {
         $perPage = 10;
-        $pets = Pet::with('species', 'breed')->orderBy('created_at', 'DESC')->paginate($perPage, ['*'], 'page', $page);
+        $pets = Pet::with('species', 'breed','client')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage, ['*'], 'page', $page);
 
         return [
 

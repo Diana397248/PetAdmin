@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Http\Requests\Client\ClientStoreRequest;
-use App\Http\Requests\Client\ClientUpdateRequest;
-use App\Http\Requests\Client\ClientFetchAllRequest;
+use App\Http\Requests\Base\PaginationRequest;
 use App\Http\Requests\Client\ClientBulkDeleteRequest;
 use App\Http\Requests\Client\ClientSearchRequest;
+use App\Http\Requests\Client\ClientStoreRequest;
+use App\Http\Requests\Client\ClientUpdateRequest;
 use App\Services\ClientService;
 use Illuminate\Http\JsonResponse;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
@@ -20,7 +20,7 @@ class ClientController extends Controller
         $this->clientService = $clientService;
     }
 
-    public function index() : \Inertia\Response
+    public function index(): \Inertia\Response
     {
         return Inertia::render('Clients/Index');
     }
@@ -66,7 +66,7 @@ class ClientController extends Controller
         return response()->json(['message' => 'Selected clients deleted successfully'], 201);
     }
 
-    public function fetchAllClients(ClientFetchAllRequest $request): JsonResponse
+    public function fetchAllClients(PaginationRequest $request): JsonResponse
     {
         $clients = $this->clientService->fetchAllClients($request->query('page', 1));
         return response()->json($clients, 201);

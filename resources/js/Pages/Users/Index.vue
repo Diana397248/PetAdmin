@@ -1,121 +1,67 @@
 <script setup>
-import {nextTick, onMounted, ref, watch} from 'vue';
+import {onMounted, ref} from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {EyeIcon, PencilSquareIcon, PlusSmallIcon, TrashIcon} from '@heroicons/vue/24/outline'
+import {EyeIcon} from '@heroicons/vue/24/outline'
 import Pagination from '@/Components/Pagination.vue'
 import SearchTable from '@/Components/SearchTable.vue'
-import Swal from "sweetalert2";
 import {Link} from '@inertiajs/vue3';
 import {initFlowbite} from 'flowbite'
-import moment from 'moment';
 import {useToast} from "vue-toastification"
 
 onMounted(() => {
     initFlowbite();
-    fetchPets();
+    fetchUsers();
 })
 
 const toast = useToast();
 const meta = ref({})
-const pets = ref([])
+const users = ref([])
 const isLoading = ref(false)
-const selectedPetIds = ref([])
-const selectAll = ref(false)
 const anyCheckboxSelected = ref(false)
 
-const fetchPets = async (page = 1) => {
+const fetchUsers = async (page = 1) => {
     isLoading.value = true
-    const response = await axios.get('/pets/fetchAllPets', {params: {page}})
-    pets.value = response.data.pets.data
+    const response = await axios.get('/admin/user/fetchAllUsers', {params: {page}})
+    users.value = response.data.users.data
     meta.value = response.data.meta
     isLoading.value = false
 }
-
+//TODO
 const handleSearch = async ({search, keywords}) => {
     if (!keywords) {
         // Show a toast error
         toast.warning('Enter a search term')
     } else {
         // If not empty, perform the search
-        pets.value = await search('/pets/search');
+        users.value = await search('/pets/search');
     }
 }
 const handleClear = () => {
-    fetchPets();
+    fetchUsers();
 }
-watch(selectAll, (newVal) => {
-    pets.value.forEach(pet => {
-        if (!pet.hasOwnProperty('selected')) {
-            pet.selected = false;
-        }
+// watch(selectAll, (newVal) => {
+//     users.value.forEach(pet => {
+//         if (!pet.hasOwnProperty('selected')) {
+//             pet.selected = false;
+//         }
+//
+//         if (pet.selected !== newVal) {
+//             pet.selected = newVal;
+//             togglePetSelection(pet.id);
+//         }
+//     });
+// });
+// const togglePetSelection = (PetId) => {
+//     if (selectedPetIds.value.includes(PetId)) {
+//         selectedPetIds.value = selectedPetIds.value.filter(id => id !== PetId);
+//     } else {
+//         selectedPetIds.value.push(PetId);
+//     }
+//
+//     anyCheckboxSelected.value = selectedPetIds.value.length > 0;
+// };
 
-        if (pet.selected !== newVal) {
-            pet.selected = newVal;
-            togglePetSelection(pet.id);
-        }
-    });
-});
-const togglePetSelection = (PetId) => {
-    if (selectedPetIds.value.includes(PetId)) {
-        selectedPetIds.value = selectedPetIds.value.filter(id => id !== PetId);
-    } else {
-        selectedPetIds.value.push(PetId);
-    }
 
-    anyCheckboxSelected.value = selectedPetIds.value.length > 0;
-};
-
-const deletePet = (id) => {
-    Swal.fire({
-        title: 'Delete Pet?',
-        text: 'Are you sure you want to delete this pet?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it',
-        cancelButtonText: 'No, keep it'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete(`/pets/${id}`)
-                .then(response => {
-                    Swal.fire('Deleted!', response.data.message, 'success');
-                    fetchPets();
-                })
-                .catch(error => {
-                    Swal.fire('Error!', error.response.data.message, 'error');
-                });
-        }
-    });
-}
-
-const handleBulkDelete = () => {
-    if (selectedPetIds.value.length > 0) {
-        Swal.fire({
-            title: 'Delete Selected Pets?',
-            text: `You have selected ${selectedPetIds.value.length} pet(s). Do you want to continue?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete them',
-            cancelButtonText: 'No, keep them'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete('/pets/bulk-delete/selected', {data: {selectedIds: selectedPetIds.value}})
-                    .then((response) => {
-                        Swal.fire('Deleted!', response.data.message, 'success')
-                        selectedPetIds.value = []
-                        anyCheckboxSelected.value = false
-                        fetchPets()
-                        nextTick(() => {
-                            selectAll.value = false;
-                        });
-                    })
-                    .catch((error) => {
-                        Swal.fire('Error!', error.response.data.message, 'error')
-                        console.error('Error:', error);
-                    });
-            }
-        });
-    }
-};
 </script>
 
 <template>
@@ -150,20 +96,6 @@ const handleBulkDelete = () => {
                                     </div>
                                 </form>
                             </div>
-                            <div
-                                class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button @click="handleBulkDelete" v-show="anyCheckboxSelected" type="button"
-                                        id="deleteSelected"
-                                        class="flex items-center justify-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                    <TrashIcon class="w-5 h-5"/>
-                                </button>
-
-                                <Link :href="route('pets.create')"
-                                      class="flex items-center justify-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
-                                    <PlusSmallIcon class="w-5 h-5 -ml-1 mr-2"/>
-                                    Добавить питомца
-                                </Link>
-                            </div>
                         </div>
                         <div v-if="isLoading" role="status"
                              class="flex items-center justify-center h-[400px] md:h-[500px]">
@@ -184,18 +116,10 @@ const handleBulkDelete = () => {
                             <thead
                                 class="hidden md:table-header-group text-xs text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3 w-[5%]">
-                                    <div class="flex items-center">
-                                        <input v-model="selectAll" id="checkbox-all" type="checkbox"
-                                               class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-all" class="sr-only">checkbox</label>
-                                    </div>
-                                </th>
+                                <th scope="col" class="px-4 py-3 w-[5%]"></th>
                                 <th scope="col" class="px-4 py-3 w-[20%]">Имя</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Клиент</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Разновидность</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Порода</th>
-                                <th scope="col" class="px-4 py-3 w-[40%]">Дата добавления</th>
+                                <th scope="col" class="px-4 py-3 w-[20%]">Почта</th>
+                                <th scope="col" class="px-4 py-3 w-[40%]">Дата создания</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Навигация</span>
                                 </th>
@@ -203,7 +127,7 @@ const handleBulkDelete = () => {
                             </thead>
 
                             <tbody>
-                            <tr v-if="pets.length === 0">
+                            <tr v-if="users.length === 0">
                                 <td colspan="6" class="pt-8">
                                     <div class="flex items-center justify-center h-full">
                                         <div class="flex items-center mt-6 text-center rounded-lg h-96">
@@ -217,8 +141,8 @@ const handleBulkDelete = () => {
                                                               d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                                                     </svg>
                                                 </div>
-                                                <h1 class="mt-3 text-lg text-gray-400 dark:text-white">Домашние животные
-                                                    не найдены</h1>
+                                                <h1 class="mt-3 text-lg text-gray-400 dark:text-white">Пользователи не
+                                                    найдены</h1>
                                                 <div
                                                     class="flex flex-col sm:flex-row items-center mt-4 sm:mx-auto gap-y-3 sm:gap-x-3">
                                                     <button @click="handleClear"
@@ -226,6 +150,7 @@ const handleBulkDelete = () => {
                                                         Очистить поиск
                                                     </button>
 
+                                                    <!--                                                    TODO:-->
                                                     <button
                                                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-indigo-700 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-indigo-800 dark:hover:bg-indigo-800 dark:bg-indigo-700">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -235,7 +160,7 @@ const handleBulkDelete = () => {
                                                                   d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                         </svg>
 
-                                                        <span>Добавить питомца</span>
+                                                        <span>Добавить пользователя</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -243,55 +168,37 @@ const handleBulkDelete = () => {
                                     </div>
                                 </td>
                             </tr>
-                            <tr v-for="pet in pets" :key="pet.id"
+                            <tr v-for="user in users" :key="user.id"
                                 class="lg:table-row flex flex-col lg:flex-row border-b dark:border-gray-700">
-                                <td scope="row" class="px-4 py-3">
-                                    <div class="flex items-center">
-                                        <input v-model="pet.selected" :id="'checkbox-' + pet.id"
-                                               @click="togglePetSelection(pet.id)" type="checkbox"
-                                               class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                                    </div>
+                                <td class="px-4 py-3"></td>
+                                <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ user.name }}
                                 </td>
                                 <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ pet.name }}
+                                    {{ user.email }}
                                 </td>
                                 <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ pet.client.name }}
-                                </td>
-                                <td class="px-4 py-1 lg:py-">{{
-                                        pet.species && pet.species.name ? pet.species.name : '-'
+                                    {{
+                                        new Date(user.created_at).toLocaleDateString() + ' ' + new Date(user.created_at).toLocaleTimeString([], {
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })
                                     }}
                                 </td>
-                                <td class="px-4 py-1 lg:py-3">{{
-                                        pet.breed && pet.breed.name ? pet.breed.name : '-'
-                                    }}
-                                </td>
-                                <td class="px-4 py-1 lg:py-3">{{ moment(pet.created_at).format('MMMM Do, YYYY') }}</td>
+
                                 <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
-                                    <Link :href="route('pets.show', { slug: pet.slug })"
+                                    <Link :href="route('admin.user.show', { email: user.email})"
                                           class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
                                         <EyeIcon class="w-5 h-5 mr-1"/>
                                         <span class="sr-only">View</span>
                                     </Link>
-                                    <Link :href="route('pets.edit', { slug: pet.slug })"
-                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
-                                        <PencilSquareIcon class="w-5 h-5 text-indigo-500 hover:text-indigo-800 mr-1"/>
-                                        <span class="sr-only">Edit</span>
-                                    </Link>
-                                    <button @click="deletePet(pet.id)"
-                                            class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                                            type="button">
-                                        <TrashIcon class="w-5 h-5 text-red-500 hover:text-red-800"/>
-                                        <span class="sr-only">Delete</span>
-                                    </button>
                                 </td>
                             </tr>
                             </tbody>
 
                         </table>
                     </div>
-                    <Pagination v-if="pets.length > 0" :meta="meta" @change-page="fetchPets"/>
+                    <Pagination v-if="users.length > 0" :meta="meta" @change-page="fetchPets"/>
                 </div>
             </div>
         </section>

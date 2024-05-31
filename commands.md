@@ -1,15 +1,30 @@
-cd C:\Users\Diana\Downloads\PetCare C:
+### Run Laravel
 
-```php artisan serve```
-```php artisan make:model NameModel -mfs```
+```sh 
+cd C:\Users\Diana\Desktop\Diploma\aibolit 
+C:
+php artisan serve
 ```
+
+### Run vue dev
+
+```sh 
+cd C:\Users\Diana\Desktop\Diploma\aibolit 
+C:
+npm run dev
+```
+
+#### Snippets:
+
+```sh
+php artisan make:model NameModel -mfs
 php artisan make:controller NameController --resource
 php artisan migrate
 ```
 
-npm run build npm run dev
+### Run seeders
 
-```
+```sh
 php artisan migrate:fresh --seed
 php artisan db:seed --class=SpeciesSeeder
 php artisan db:seed --class=BreedsSeeder
@@ -20,4 +35,9 @@ php artisan db:seed --class=BreedsSeeder
 php artisan db:seed --class=PetsSeeder
 php artisan db:seed --class=ItemsSeeder
 php artisan db:seed --class=VetSeeder
+```
+
+### Run build vue (create static files) fol laravel
+```sh
+npm run build
 ```

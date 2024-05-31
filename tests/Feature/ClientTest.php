@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Http\Requests\Client\ClientStoreRequest;
 use App\Http\Requests\Client\ClientUpdateRequest;
 use App\Http\Requests\Client\ClientBulkDeleteRequest;
-use App\Http\Requests\Client\ClientFetchAllRequest;
+use App\Http\Requests\Client\PaginationRequest;
 use App\Http\Requests\Client\ClientSearchRequest;
 
 class ClientTest extends TestCase
@@ -94,7 +94,7 @@ class ClientTest extends TestCase
 
     public function testFetchAllClients()
     {
-        $request = new ClientFetchAllRequest(['page' => 1]);
+        $request = new PaginationRequest(['page' => 1]);
         $response = $this->get('/clients/fetchAllClients', $request->query());
         $response->assertStatus(201);
     }
