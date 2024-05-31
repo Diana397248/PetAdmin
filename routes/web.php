@@ -116,6 +116,7 @@ Route::middleware([
     // cabinet
     Route::get('/cabinet', [CabinetController::class, 'index'])->name('cabinet');
     Route::get('/cabinet/calendars', [CabinetController::class, 'calendars'])->name('Calendars');
+    Route::get('/cabinet/addAppointment', [CabinetController::class, 'addAppointment'])->name('cabinet.addAppointment');
 
 
     // TODO REMOVE

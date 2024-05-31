@@ -24,6 +24,15 @@ class CabinetController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function addAppointment(): \Inertia\Response
+    {
+        return Inertia::render('Cabinet/Appointment/AddAppointment');
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
