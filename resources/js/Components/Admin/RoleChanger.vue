@@ -32,11 +32,12 @@
 <script setup>
 import {watch, ref} from "vue";
 
-const data = ref('client')
+
 
 const props = defineProps({
     user: Object,
 })
+const data = ref(props.user.role)
 
 const emit = defineEmits(["handleForm"])
 

@@ -8,7 +8,6 @@ use App\Models\Vet;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -72,17 +71,27 @@ class AdminController extends Controller
 
     public function changeRole(Request $request, $userId)
     {
+
 //        TODO: client
         $vet = Vet::where('user_id', $userId)->first();
         if ($vet) {
-            return response()->json([
-                'error' => 'Ветеринар уже создан'],
-                400
-            );
+            $vet->delete();
         }
+
         $user = User::findOrFail($userId);
-        $user->role = $request->input('role');
+        $role = $request->input('role');
+        $user->role = $role;
         $user->save();
+
+        if ($role === 'doctor') {
+            $newVet = new Vet();
+            $newVet->user_id = $user->id;
+            $newVet->save();
+        } else if ($role === 'client') {
+// TODO
+        } else if ($role === 'cashier') {
+            // TODO
+        }
 
         return response()->json([
             'message' => 'Роль успешно изменена!'],

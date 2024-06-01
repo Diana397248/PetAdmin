@@ -72,7 +72,7 @@ const editRole = (val, userId) => {
                     fetchUsers();
                 })
                 .catch(error => {
-                    Swal.fire('Ошибка!', error.response.data.error, 'error');
+                    Swal.fire('Ошибка!', error.response.data.message, 'error');
                 });
         }
     });
@@ -216,8 +216,8 @@ const editRole = (val, userId) => {
                                 </td>
 
                                 <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
-<!--                                    TODO other role changes-->
-                                    <RoleChanger v-if="user.role==='client'" :user="user" @handleForm="editRole"/>
+                                    <!--                                    TODO other role changes-->
+                                    <RoleChanger :user="user" @handleForm="editRole"/>
                                     <Link :href="route('admin.user.show', { email: user.email})"
                                           class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
                                         <EyeIcon class="w-5 h-5 mr-1"/>
