@@ -1,6 +1,6 @@
 <template>
     <div class="block-f">
-        <v-avatar color="surface-variant" size="130">
+        <v-avatar color="surface-variant" :size="props.size">
             <v-img :src="props.img"></v-img>
         </v-avatar>
         <v-btn v-if="props.textBtn" class="my-btn" variant="text" color="#FFC59E">
@@ -12,7 +12,11 @@
 <script setup>
 const props = defineProps({
     img: String,
-    textBtn: String
+    textBtn: String,
+    size: {
+        type: Number,
+        default: 130
+    }
 })
 
 </script>
