@@ -41,7 +41,7 @@ const props = defineProps({
 const emit = defineEmits(["handleForm"])
 
 const handleForm = () => {
-    emit('handleForm', props.user.role, props.user.id)
+    emit('handleForm',  data.value, props.user.id)
 }
 
 watch(props.user.role, () => data.value = props.user.role)

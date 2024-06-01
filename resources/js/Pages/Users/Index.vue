@@ -28,14 +28,15 @@ const fetchUsers = async (page = 1) => {
     meta.value = response.data.meta
     isLoading.value = false
 }
-//TODO
+
 const handleSearch = async ({search, keywords}) => {
     if (!keywords) {
         // Show a toast error
         toast.warning('Enter a search term')
     } else {
         // If not empty, perform the search
-        users.value = await search('/pets/search');
+        //TODO
+        // users.value = await search('/pets/search');
     }
 }
 const handleClear = () => {
@@ -187,19 +188,6 @@ const editRole = (val, userId) => {
                                                             class="px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
                                                         Очистить поиск
                                                     </button>
-
-                                                    <!--                                                    TODO:-->
-                                                    <button
-                                                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-indigo-700 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-indigo-800 dark:hover:bg-indigo-800 dark:bg-indigo-700">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                             viewBox="0 0 24 24" stroke-width="1.5"
-                                                             stroke="currentColor" class="w-5 h-5">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                        </svg>
-
-                                                        <span>Добавить пользователя</span>
-                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -241,7 +229,7 @@ const editRole = (val, userId) => {
 
                         </table>
                     </div>
-                    <Pagination v-if="users.length > 0" :meta="meta" @change-page="fetchPets"/>
+                    <Pagination v-if="users.length > 0" :meta="meta" @change-page="fetchUsers"/>
                 </div>
             </div>
         </section>
