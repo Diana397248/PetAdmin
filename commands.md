@@ -41,3 +41,11 @@ php artisan db:seed --class=VetSeeder
 ```sh
 npm run build
 ```
+
+
+
+Remove old sym link  and create new for upload files work
+```sh
+rm ./public/storage
+php artisan storage:link
+```

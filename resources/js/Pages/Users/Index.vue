@@ -106,7 +106,7 @@ const editRole = (val, userId) => {
     <AppLayout title="Pets">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Питомцы
+                Пользователи
             </h2>
         </template>
 
@@ -216,13 +216,14 @@ const editRole = (val, userId) => {
                                 </td>
 
                                 <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
-                                    <!--                                    TODO other role changes-->
                                     <RoleChanger :user="user" @handleForm="editRole"/>
-                                    <Link :href="route('admin.user.show', { email: user.email})"
-                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
-                                        <EyeIcon class="w-5 h-5 mr-1"/>
-                                        <span class="sr-only">View</span>
-                                    </Link>
+
+<!--                                    TODO-->
+<!--                                    <Link :href="route('admin.user.show', { email: user.email})"-->
+<!--                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">-->
+<!--                                        <EyeIcon class="w-5 h-5 mr-1"/>-->
+<!--                                        <span class="sr-only">View</span>-->
+<!--                                    </Link>-->
                                 </td>
                             </tr>
                             </tbody>
