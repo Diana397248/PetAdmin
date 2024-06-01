@@ -123,7 +123,7 @@ Route::middleware([
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
     Route::get('/admin/user/fetchAllUsers', [AdminController::class, 'fetchAllUsers'])->name('admin.fetchAllUsers');
     Route::get('/users/{email}/show', [AdminController::class, 'show'])->name('admin.user.show');
-    Route::get('/users/{slug}/show', [PetController::class, 'show'])->name('pets.show');
+    Route::put('/admin/user/{userId}', [AdminController::class, 'changeRole'])->name('admin.user.changeRole');
 
 
     // TODO REMOVE

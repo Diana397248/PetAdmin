@@ -4,9 +4,11 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {EyeIcon} from '@heroicons/vue/24/outline'
 import Pagination from '@/Components/Pagination.vue'
 import SearchTable from '@/Components/SearchTable.vue'
+import RoleChanger from '@/Components/Admin/RoleChanger.vue'
 import {Link} from '@inertiajs/vue3';
 import {initFlowbite} from 'flowbite'
 import {useToast} from "vue-toastification"
+import Swal from "sweetalert2";
 
 onMounted(() => {
     initFlowbite();
@@ -53,6 +55,27 @@ const roleToString = (role) => {
 }
 
 
+const editRole = (val, userId) => {
+    Swal.fire({
+        title: 'Изменить роль?',
+        text: 'Вы уверены, что хотите изменить роль?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Да, изменить',
+        cancelButtonText: 'Отмена'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.put(`/admin/user/${userId}`, {'role': val})
+                .then(response => {
+                    Swal.fire('Изменено!', response.data.message, 'success');
+                    fetchUsers();
+                })
+                .catch(error => {
+                    Swal.fire('Ошибка!', error.response.data.error, 'error');
+                });
+        }
+    });
+}
 // watch(selectAll, (newVal) => {
 //     users.value.forEach(pet => {
 //         if (!pet.hasOwnProperty('selected')) {
@@ -131,10 +154,10 @@ const roleToString = (role) => {
                                 class="hidden md:table-header-group text-xs text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3 w-[5%]"></th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Имя</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Почта</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Роль</th>
-                                <th scope="col" class="px-4 py-3 w-[40%]">Дата создания</th>
+                                <th scope="col" class="px-4 py-3 w-[15%]">Имя</th>
+                                <th scope="col" class="px-4 py-3 w-[15%]">Почта</th>
+                                <th scope="col" class="px-4 py-3 w-[10%]">Роль</th>
+                                <th scope="col" class="px-4 py-3 w-[15%]">Дата создания</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Навигация</span>
                                 </th>
@@ -205,6 +228,8 @@ const roleToString = (role) => {
                                 </td>
 
                                 <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
+<!--                                    TODO other role changes-->
+                                    <RoleChanger v-if="user.role==='client'" :user="user" @handleForm="editRole"/>
                                     <Link :href="route('admin.user.show', { email: user.email})"
                                           class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
                                         <EyeIcon class="w-5 h-5 mr-1"/>

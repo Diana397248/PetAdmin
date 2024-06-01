@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Vet;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class VetSeeder extends Seeder
 {
@@ -13,11 +14,14 @@ class VetSeeder extends Seeder
      */
     public function run(): void
     {
-        Vet::factory()->create([
-            'user_id' => 1,
+        $user = User::factory()->create([
+            'name' => 'vet',
+            'role' => 'doctor',
+            'email' => 'vet@gmail.com',
+            'password' => Hash::make('vetvetvet'),
         ]);
         Vet::factory()->create([
-            'user_id' => 2,
+            'user_id' => $user->id,
         ]);
     }
 }

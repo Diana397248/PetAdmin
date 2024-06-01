@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Base\PaginationRequest;
 use App\Models\User;
+use App\Models\Vet;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -31,6 +33,7 @@ class AdminController extends Controller
         $users = $this->userService->fetchAllUsers($request->query('page', 1));
         return response()->json($users, 201);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -65,6 +68,26 @@ class AdminController extends Controller
         return Inertia::render('Pets/Show', [
             'user' => $user
         ]);
+    }
+
+    public function changeRole(Request $request, $userId)
+    {
+//        TODO: client
+        $vet = Vet::where('user_id', $userId)->first();
+        if ($vet) {
+            return response()->json([
+                'error' => 'Ветеринар уже создан'],
+                400
+            );
+        }
+        $user = User::findOrFail($userId);
+        $user->role = $request->input('role');
+        $user->save();
+
+        return response()->json([
+            'message' => 'Роль успешно изменена!'],
+            200
+        );
     }
 
     /**
