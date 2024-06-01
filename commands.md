@@ -46,6 +46,8 @@ npm run build
 
 Remove old sym link  and create new for upload files work
 ```sh
-rm ./public/storage
+cd public
+rmdir storage
+cd ..
 php artisan storage:link
 ```
