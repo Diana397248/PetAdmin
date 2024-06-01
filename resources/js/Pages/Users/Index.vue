@@ -39,6 +39,20 @@ const handleSearch = async ({search, keywords}) => {
 const handleClear = () => {
     fetchUsers();
 }
+
+const roleToString = (role) => {
+    if (role === 'admin') {
+        return 'Администратор';
+    } else if (role === 'cashier') {
+        return 'Кассир';
+    } else if (role === 'doctor') {
+        return 'Доктор';
+    } else {
+        return 'Клиент';
+    }
+}
+
+
 // watch(selectAll, (newVal) => {
 //     users.value.forEach(pet => {
 //         if (!pet.hasOwnProperty('selected')) {
@@ -119,6 +133,7 @@ const handleClear = () => {
                                 <th scope="col" class="px-4 py-3 w-[5%]"></th>
                                 <th scope="col" class="px-4 py-3 w-[20%]">Имя</th>
                                 <th scope="col" class="px-4 py-3 w-[20%]">Почта</th>
+                                <th scope="col" class="px-4 py-3 w-[20%]">Роль</th>
                                 <th scope="col" class="px-4 py-3 w-[40%]">Дата создания</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Навигация</span>
@@ -176,6 +191,9 @@ const handleClear = () => {
                                 </td>
                                 <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ user.email }}
+                                </td>
+                                <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ roleToString(user.role) }}
                                 </td>
                                 <td class="px-4 py-1 lg:py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{

@@ -40,6 +40,11 @@ const props = defineProps({
               <h1 class="px-2 text-sm">{{ client.email }}</h1>
             </div>
 
+              <div v-if="client.role" class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                  <EnvelopeIcon class="w-6 h-6" />
+                  <h1 class="px-2 text-sm">{{ client.role }}</h1>
+              </div>
+
             <div v-if="client.phone_number" class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
               <PhoneIcon class="w-6 h-6" />
               <h1 class="px-2 text-sm">{{ client.phone_number }}</h1>
