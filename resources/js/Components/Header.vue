@@ -43,32 +43,28 @@
                 </Link>
             </nav>
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-center">
-                <!--                <template v-if="store.isAuth && !store.isAdmin">-->
-                <!--                    <Link :href="route('AddPost')" :active="route().current('AddPost')">-->
-                <!--                        <img :src="/assets/addButton.png"/>-->
-                <!--                    </Link>-->
-                <!--                </template>-->
-                <!--        auth routes-->
-                <Link :href="route('login')" :active="route().current('login')"
-                      v-if="!store.isAuth"
-                      class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
-                >
-                    Авторизация
-                </Link>
-                <Link :href="route('register')" :active="route().current('register')"
-                      v-if="!store.isAuth"
-                      class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
-                >
-                    Регистрация
-                </Link>
-
-                <span
-                    v-if="store.isAuth"
-                    @click="logOut"
-                    role="button"
-                    class="me-3 py-2 text-black text-decoration-none fs-5 ml-4"
-                >Выход</span
-                >
+                <template v-if="!$page.props.auth?.user">
+                    <Link :href="route('login')" :active="route().current('login')"
+                          class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
+                    >
+                        Авторизация
+                    </Link>
+                    <Link :href="route('register')" :active="route().current('register')"
+                          class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
+                    >
+                        Регистрация
+                    </Link>
+                </template>
+                <!--                for AUTH USER-->
+                <template v-if="!!$page.props.auth?.user">
+                    <span class="fs-5 ">{{ $page.props.auth.user.name }}</span>
+                    <span
+                        @click="logOut"
+                        role="button"
+                        class="me-3 py-2 text-black text-decoration-none fs-5 ml-4"
+                    >Выход</span
+                    >
+                </template>
             </nav>
         </div>
     </header>
@@ -78,24 +74,16 @@
 </template>
 
 <script setup>
+import {Link, router} from "@inertiajs/vue3";
 import {onMounted} from "vue";
-import {Link} from '@inertiajs/vue3';
 
 const store = {
     isDebug: false
 }
-// const logOut = () => {
-//   http
-//       .get(`/api/logout`)
-//       .then((res) => {
-//         clearStore()
-//         // todo
-//         window.location.href = "/login";
-//       })
-//       .catch(() => {
-//         clearStore()
-//       });
-// };
+const logOut = () => {
+    router.post(route('logout'));
+};
+
 
 onMounted(() => {
 });

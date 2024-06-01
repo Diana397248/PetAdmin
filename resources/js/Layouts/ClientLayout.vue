@@ -13,9 +13,6 @@ onMounted(() => {
 
 defineProps({});
 
-// const logout = () => {
-// 	router.post(route('logout'));
-// };
 </script>
 
 <template>

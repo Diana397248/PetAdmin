@@ -12,6 +12,7 @@ use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\SurgicalHistoryController;
 use App\Http\Controllers\VaccinationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -27,7 +28,17 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    $authenticatable = Auth::user();
+    if ($authenticatable) {
+        $userRole = $authenticatable->role;
+        if ($userRole === 'doctor' ||
+            $userRole === 'cashier' ||
+            $userRole === 'admin') {
+            return redirect("/dashboard");
+        }
+        return redirect("/cabinet");
+    }
+    return redirect("/cabinet/main");
 });
 
 Route::middleware([
@@ -157,3 +168,6 @@ Route::middleware([
 Route::get('/csrf-token', function () {
     return csrf_token();
 });
+
+// cabinet
+Route::get('/cabinet/main', [CabinetController::class, 'index'])->name('cabinet.main');
