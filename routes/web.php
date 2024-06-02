@@ -53,6 +53,7 @@ Route::middleware([
 
     // Clients
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+    Route::get('/clients/profile', [ClientController::class, 'getProfile'])->name('getProfile');
     Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
     Route::post('/clients/store', [ClientController::class, 'store'])->name('clients.store');
     Route::get('/clients/fetchAllClients', [ClientController::class, 'fetchAllClients'])->name('clients.fetchAll');

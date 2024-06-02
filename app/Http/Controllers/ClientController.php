@@ -7,8 +7,10 @@ use App\Http\Requests\Client\ClientBulkDeleteRequest;
 use App\Http\Requests\Client\ClientSearchRequest;
 use App\Http\Requests\Client\ClientStoreRequest;
 use App\Http\Requests\Client\ClientUpdateRequest;
+use App\Models\Client;
 use App\Services\ClientService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ClientController extends Controller
@@ -35,6 +37,7 @@ class ClientController extends Controller
         $client = $this->clientService->findClientBySlug($slug);
         return Inertia::render('Clients/Show', ['client' => $client]);
     }
+
 
     public function edit($slug): \Inertia\Response
     {
@@ -70,6 +73,13 @@ class ClientController extends Controller
     {
         $clients = $this->clientService->fetchAllClients($request->query('page', 1));
         return response()->json($clients, 201);
+    }
+
+    public function getProfile(): JsonResponse
+    {
+        $userId = Auth::user()->id;
+        $client = Client::where('user_id', $userId)->firstOrFail();
+        return response()->json($client, 200);
     }
 
     public function search(ClientSearchRequest $request): JsonResponse
