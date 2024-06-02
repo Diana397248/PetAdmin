@@ -175,8 +175,6 @@ const submitAppointmentForm = async () => {
     // }
 
     const formData = {
-        // todo
-        client_id: 1,
         vet_id: 1,
         start_time: model.date,
         description: model.desc,

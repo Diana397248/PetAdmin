@@ -4,6 +4,7 @@ namespace App\Http\Requests\Appointment;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AppointmentRequest extends FormRequest
 {
@@ -22,8 +23,9 @@ class AppointmentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $isNotClient = Auth::user()->role != 'client';
         return [
-            'client_id' => 'required|integer|exists:clients,id',
+            'client_id' => [Rule::requiredIf($isNotClient), 'integer', 'exists:clients,id'],
             'vet_id' => 'required|integer|exists:vets,id',
             'description' => 'nullable|string',
             'start_time' => 'required|date|after:today',
