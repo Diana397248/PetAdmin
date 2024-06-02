@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Client;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class ClientsSeeder extends Seeder
 {
@@ -15,17 +16,19 @@ class ClientsSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 55; $i++) {
-    
-            Client::create([
+        for ($i = 0; $i < 5; $i++) {
+            $user = User::create([
                 'name' => $faker->name,
-                'email' => $faker->unique()->safeEmail,
-                'phone_number' => $faker->phoneNumber,
-                'address' => $faker->address,
-                'notes' => $faker->text,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'email' => 'test' . ($i + 1) . '@gmail.com',
+                'password' => Hash::make('testtest'),
             ]);
+            $client = Client::where('user_id', $user->id)->first();
+
+
+            $client->phone_number = $faker->phoneNumber;
+            $client->address = $faker->address;
+            $client->notes = $faker->text;
+            $client->save();
         }
     }
 }

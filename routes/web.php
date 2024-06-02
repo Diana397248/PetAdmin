@@ -44,8 +44,11 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified',
+    'verified'
 ])->group(function () {
+//    Route::group([['middleware' => '']], function () {
+//
+//    });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Clients
@@ -145,7 +148,6 @@ Route::middleware([
     Route::get('/test2', function () {
         return Inertia::render('Cabinet/Index');
     })->name('UserProfile');
-
 
     Route::get('/test4', function () {
         return Inertia::render('Cabinet/Index');

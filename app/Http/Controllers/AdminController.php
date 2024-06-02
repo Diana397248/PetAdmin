@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Base\PaginationRequest;
+use App\Models\Client;
 use App\Models\User;
 use App\Models\Vet;
 use App\Services\UserService;
@@ -71,25 +72,33 @@ class AdminController extends Controller
 
     public function changeRole(Request $request, $userId)
     {
-
-//        TODO: client
-        $vet = Vet::where('user_id', $userId)->first();
-        if ($vet) {
-            $vet->delete();
+        $user = User::findOrFail($userId);
+        $oldRole = $user->role;
+        if ($oldRole === 'doctor') {
+            $vet = Vet::where('user_id', $userId)->first();
+            if ($vet) {
+                $vet->delete();
+            }
+        } else if ($oldRole === 'client') {
+            $client = Client::where('user_id', $userId)->first();
+            if ($client) {
+                $client->delete();
+            }
+        } else if ($oldRole === 'cashier') {
+            // TODO
         }
 
-        $user = User::findOrFail($userId);
-        $role = $request->input('role');
-        $user->role = $role;
+        $newRole = $request->input('role');
+        $user->role = $newRole;
         $user->save();
 
-        if ($role === 'doctor') {
+        if ($newRole === 'doctor') {
             $newVet = new Vet();
             $newVet->user_id = $user->id;
             $newVet->save();
-        } else if ($role === 'client') {
+        } else if ($newRole === 'client') {
 // TODO
-        } else if ($role === 'cashier') {
+        } else if ($newRole === 'cashier') {
             // TODO
         }
 

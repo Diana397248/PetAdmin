@@ -9,6 +9,7 @@ use App\Models\Pet;
 use App\Services\PetService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 

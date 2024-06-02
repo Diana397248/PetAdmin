@@ -246,7 +246,7 @@ onMounted(async () => {
                         </div>
                     </div>
                     <div class="col-span-6">
-                        <label for="client_id" class="mb-2 block text-sm font-medium text-gray-500">Client</label>
+                        <label for="client_id" class="mb-2 block text-sm font-medium text-gray-500">Клиент</label>
                         <VueMultiselect v-model="selectedUser"
                                         :class="{ 'error': errors.client_id }"
                                         :options="matchingUsers" :multiple="false" :clear-on-select="true"
@@ -328,8 +328,8 @@ onMounted(async () => {
                                     </div>
                                     <div class="text-gray-600">
                                         <a href="#" class="font-medium text-indigo-500 hover:text-indigo-700">Нажмите,
-                                            чтобы загрузить</a> or drag and
-                                        drop
+                                            чтобы загрузить</a> или перетащите чтобы
+                                        открыть
                                     </div>
                                     <p class="text-sm text-gray-500">
                                         PNG или JPG </p>

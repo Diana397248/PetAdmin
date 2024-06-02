@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\User;
 use App\Models\Vet;
 use Illuminate\Database\Seeder;
@@ -23,5 +24,7 @@ class VetSeeder extends Seeder
         Vet::factory()->create([
             'user_id' => $user->id,
         ]);
+        $client = Client::where('user_id', $user->id)->first();
+        $client->delete();
     }
 }

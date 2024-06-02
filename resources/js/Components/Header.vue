@@ -44,12 +44,12 @@
             </nav>
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-center">
                 <template v-if="!$page.props.auth?.user">
-                    <Link :href="route('login')" :active="route().current('login')"
+                    <Link @click="login" :active="route().current('login')"
                           class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
                     >
                         Авторизация
                     </Link>
-                    <Link :href="route('register')" :active="route().current('register')"
+                    <Link @click="register" :active="route().current('register')"
                           class="me-3 py-2 text-black text-decoration-none fs-5 text-teachat__hover"
                     >
                         Регистрация
@@ -84,32 +84,18 @@ const logOut = () => {
     router.post(route('logout'));
 };
 
+const login = () => {
+    router.get(route('login'));
+};
+
+const register = () => {
+    router.get(route('register'));
+};
 
 onMounted(() => {
 });
 </script>
-<script>
 
-export default {
-    data: () => ({
-        valid: false,
-        search: "@",
-        searchEngine: [
-            (value) => {
-                if (value) return true;
-
-                return "Используйте идентификатор @";
-            },
-            (value) => {
-                if (value?.length <= 13) return true;
-
-                return "Имя не может быть длиннее 12 знаков";
-            },
-        ],
-    }),
-    methods: {},
-};
-</script>
 
 <style scoped>
 .text-teachat {

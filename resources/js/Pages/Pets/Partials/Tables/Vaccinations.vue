@@ -13,19 +13,18 @@ const props = defineProps({
 <template>
 	<div class="px-4 py-5 sm:p-6">
 		<template v-if="pet.vaccinations.length === 0">
-			<p class="text-center text-gray-500 py-4">No vaccinations found.</p>
+			<p class="text-center text-gray-500 py-4">Прививок не обнаружено.</p>
 		</template>
 		<template v-else>
 			<table class="min-w-full divide-y divide-gray-300">
 				<thead>
 					<tr>
-						<th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Vaccination
-							Name</th>
-						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Administering Date</th>
-						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Batch Number</th>
-						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Administering Veterinarian
+						<th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Название вакцины</th>
+						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Дата вакцины</th>
+						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Серийный номер</th>
+						<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Главный ветеринар
 						</th>
-						<th scope="col" class="py-3.5 text-right text-sm font-semibold text-gray-900">Notes</th>
+						<th scope="col" class="py-3.5 text-right text-sm font-semibold text-gray-900">Примечания</th>
 					</tr>
 				</thead>
 				<tbody class="divide-y divide-gray-200">

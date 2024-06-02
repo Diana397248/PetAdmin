@@ -3,14 +3,21 @@
 namespace App\Services;
 
 use App\Models\Breed;
+use App\Models\Client;
 use App\Models\Pet;
 use App\Models\Species;
-use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 
 class PetService
 {
     public function createPet(array $data): void
     {
+        if (Auth::user()->role === 'client') {
+            $client = Client::where('user_id', Auth::user()->id)->firstOrFail();
+            if ($client) {
+                $data['client_id'] = $client->id;
+            }
+        }
         $pet = Pet::create($data);
 
         if (array_key_exists('photo', $data) && $data['photo']->isValid()) {
@@ -59,8 +66,15 @@ class PetService
     public function fetchAllPets($page)
     {
         $perPage = 10;
-        $pets = Pet::with('species', 'breed','client')
-            ->orderBy('created_at', 'DESC')
+        $petsQuery = Pet::with('species', 'breed', 'client');
+        if (Auth::user()->role === 'client') {
+            $client = Client::where('user_id', Auth::user()->id)->first();
+            if ($client) {
+                $petsQuery = $petsQuery->where('client_id', $client->id);
+            }
+        }
+
+        $pets = $petsQuery->orderBy('created_at', 'DESC')
             ->paginate($perPage, ['*'], 'page', $page);
 
         return [
