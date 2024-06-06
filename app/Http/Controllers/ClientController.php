@@ -87,4 +87,5 @@ class ClientController extends Controller
         $clients = $this->clientService->searchClients($request->validated()['keywords']);
         return response()->json($clients, 201);
     }
+    
 }

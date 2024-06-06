@@ -134,6 +134,9 @@ Route::middleware([
     Route::get('/cabinet/calendars', [CabinetController::class, 'calendars'])->name('Calendars');
     Route::get('/cabinet/addAppointment', [CabinetController::class, 'addAppointment'])->name('cabinet.addAppointment');
 
+    Route::put('/cabinet/user/profile', [CabinetController::class, 'updateUserProfile'])->name('UpdateUserProfile');
+
+
     // admin
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
     Route::get('/admin/user/fetchAllUsers', [AdminController::class, 'fetchAllUsers'])->name('admin.fetchAllUsers');
@@ -142,10 +145,6 @@ Route::middleware([
 
 
     // TODO REMOVE
-    Route::get('/test', function () {
-        return Inertia::render('Cabinet/Index');
-    })->name('HomePage');
-
     Route::get('/test2', function () {
         return Inertia::render('Cabinet/Index');
     })->name('UserProfile');
@@ -158,14 +157,11 @@ Route::middleware([
         return Inertia::render('Cabinet/Index');
     })->name('UserForm');
 
-    Route::get('/test6', function () {
-        return Inertia::render('Cabinet/Index');
-    })->name('HomePage');
-
-    Route::get('/test7', function () {
-        return Inertia::render('Cabinet/Index');
+    Route::get('/cabinet/home', function () {
+        return Inertia::render('Cabinet/Home/HomePage');
     })->name('HomePage');
 });
+//home
 
 
 Route::get('/csrf-token', function () {

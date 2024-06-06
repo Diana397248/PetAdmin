@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileUpdateRequest;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CabinetController extends Controller
@@ -78,5 +81,19 @@ class CabinetController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updateUserProfile(UserProfileUpdateRequest $request)
+    {
+        $formData = $request->validated();
+        $currentUser = Auth::user();
+        $userProfile = Client::where('user_id', $currentUser->id)->firstOrFail();
+        $userProfile->name = $formData['name'];
+        $userProfile->second_name = $formData['second_name'];
+        $userProfile->patronymic = $formData['patronymic'];
+        $userProfile->phone_number = $formData['phone_number'];
+        $userProfile->notes = $formData['notes'];
+        $userProfile->save();
+        return response()->json(['message' => 'Данные успешно обновлены'], 201);
     }
 }
