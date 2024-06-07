@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
                 if ($userRole === 'doctor' ||
                     $userRole === 'cashier' ||
                     $userRole === 'admin') {
-                    return redirect("/");
+                    return redirect("/dashboard");
                 }
                 return redirect("/cabinet");
             }
