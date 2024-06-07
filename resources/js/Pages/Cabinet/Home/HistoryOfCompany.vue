@@ -1,10 +1,10 @@
 <template>
-<!--  <img :src="HistoryOfCompany" alt="" >-->
-    HistoryOfCompany
+    <img src="/assets/history-of-company.png" alt="">
+
 </template>
 
 <script setup>
-// import HistoryOfCompany from '@/assets/history-of-company.png'
+
 
 </script>
 

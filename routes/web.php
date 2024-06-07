@@ -38,7 +38,7 @@ Route::get('/', function () {
         }
         return redirect("/cabinet");
     }
-    return redirect("/cabinet/main");
+    return redirect()->route('HomePage');
 });
 
 Route::middleware([

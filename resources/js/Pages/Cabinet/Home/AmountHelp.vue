@@ -1,15 +1,12 @@
 <template>
-<!--  <img :src="help" >-->
-    help
+    <img src="/assets/Help.png">
+
 </template>
 
-<script setup>
-import help from '@/assets/Help.png'
-
-</script>
+<script setup></script>
 
 <style scoped>
-img{
-  padding-bottom: 150px !important;
+img {
+    padding-bottom: 150px !important;
 }
 </style>

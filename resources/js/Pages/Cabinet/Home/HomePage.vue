@@ -1,17 +1,18 @@
 <template>
-  <Carousel/>
-  <CardService/>
-  <div class="d-flex flex-column gap-5">
-    <HistoryOfCompany/>
-    <AmountHelp/>
-    <AboutUs/>
-    <WeMap/>
-  </div>
+
+    <Carousel/>
+<!--    <CardServices/>-->
+    <div class="d-flex flex-column gap-5">
+        <HistoryOfCompany/>
+        <AmountHelp/>
+        <AboutUs/>
+        <WeMap/>
+    </div>
 </template>
 
 <script setup>
 import Carousel from "@/Pages/Cabinet/Home/Carousel.vue"
-import CardService from "@/Pages/Cabinet/Home/CardService.vue"
+// import CardServices from "@/Pages/Cabinet/Home/CardServices.vue"
 import HistoryOfCompany from "@/Pages/Cabinet/Home/HistoryOfCompany.vue"
 import AmountHelp from "@/Pages/Cabinet/Home/AmountHelp.vue"
 import AboutUs from "@/Pages/Cabinet/Home/AboutUs.vue"

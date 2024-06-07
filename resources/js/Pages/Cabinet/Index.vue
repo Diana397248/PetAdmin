@@ -35,28 +35,28 @@ const isLoading = ref(false)
 
 const deleteItem = (id) => {
     Swal.fire({
-        title: 'Delete Item?',
-        text: 'Are you sure you want to delete this item?',
+        title: 'Удалить услугу?',
+        text: 'Вы уверены, что хотите удалить эту услугу?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it',
-        cancelButtonText: 'No, keep it'
+        confirmButtonText: 'Да, удалить',
+        cancelButtonText: 'Отмена'
     }).then((result) => {
         if (result.isConfirmed) {
             axios.delete(`/items/${id}`)
                 .then(response => {
-                    Swal.fire('Deleted!', response.data.message, 'success');
+                    Swal.fire('Удалено!', response.data.message, 'success');
                     fetchItems();
                 })
                 .catch(error => {
-                    Swal.fire('Error!', error.response.data.message, 'error');
+                    Swal.fire('Ошибка!', error.response.data.message, 'error');
                 });
         }
     });
 }
 
 const editItem = (id) => {
-    console.log(`Editing item ${id}`);
+    console.log(`Редактирование услуги${id}`);
 }
 </script>
 

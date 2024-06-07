@@ -1,11 +1,11 @@
 <template>
-<!--  <img :src="map" alt="">-->
-    map
-<!--  <div id="map-test" class="map"></div>-->
+    <img src="/assets/map.png" alt="">
+
+    <!--  <div id="map-test" class="map"></div>-->
 </template>
 
 <script setup>
-import map from '@/assets/map.png'
+
 //
 // let center = [48.8866527839977, 2.34310679732974];
 //

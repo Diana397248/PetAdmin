@@ -1,7 +1,6 @@
 <script setup>
 import {Head, Link, useForm} from '@inertiajs/vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -30,7 +29,7 @@ const submit = () => {
 
         <AuthenticationCard>
             <template #logo>
-                <AuthenticationCardLogo/>
+                <img src="/assets/logo.png" class="fs-4 py-2"/>
             </template>
 
             <form @submit.prevent="submit">
@@ -93,11 +92,11 @@ const submit = () => {
                             <Checkbox id="terms" v-model:checked="form.terms" name="terms" required/>
 
                             <div class="ms-2">
-                                I agree to the <a target="_blank" :href="route('terms.show')"
-                                                  class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms
-                                of Service</a> and <a target="_blank" :href="route('policy.show')"
-                                                      class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy
-                                Policy</a>
+                                я согласен <a target="_blank" :href="route('terms.show')"
+                                                  class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ">
+                                Условия использования</a> and <a target="_blank" :href="route('policy.show')"
+                                                      class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ">
+                                политика конфиденциальности</a>
                             </div>
                         </div>
                         <InputError class="mt-2" :message="form.errors.terms"/>
