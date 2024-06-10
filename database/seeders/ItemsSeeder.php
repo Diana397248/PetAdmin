@@ -22,7 +22,7 @@ class ItemsSeeder extends Seeder
                 'slug' => Str::slug($items[$i]),
                 'description' => $items[$i],
                 'quantity' => rand(1, 100),
-                'unit_price' => $randPrice[rand(0, count($randPrice))],
+                'unit_price' => $randPrice[rand(0, count($randPrice)-1)],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
