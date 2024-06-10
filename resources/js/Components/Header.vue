@@ -11,36 +11,47 @@
 
             </Link>
             <nav class="mx-12 d-flex gap-5">
-                <Link :href="route('UserProfile')" :active="route().current('UserProfile')"
-                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
-                >
-                    УСЛУГИ
-                </Link>
+                <template v-if="$page.props.auth?.user.role==='client'">
+                    <!--TODO -->
+                    <!--                <Link :href="route('UserProfile')" :active="route().current('UserProfile')"-->
+                    <!--                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"-->
+                    <!--                >-->
+                    <!--                    УСЛУГИ-->
+                    <!--                </Link>-->
 
-                <Link :href="route('UserProfile')" :active="route().current('UserProfile')"
-                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
-                >
-                    ЛИЧНЫЙ КАБИНЕТ
-                </Link>
+                    <Link :href="route('UserProfile')" :active="route().current('UserProfile')"
+                          class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
+                    >
+                        ЛИЧНЫЙ КАБИНЕТ
+                    </Link>
+                    <!--TODO -->
+                    <!--                <Link :href="route('UserProfile')" :active="route().current('UserProfile')"-->
+                    <!--                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"-->
+                    <!--                >-->
+                    <!--                    О НАС-->
+                    <!--                </Link>-->
+                    <Link :href="route('Calendars')" :active="route().current('Calendars')"
+                          class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
+                    >
+                        ЗАПИСАТЬСЯ
+                    </Link>
 
-                <Link :href="route('UserProfile')" :active="route().current('UserProfile')"
-                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
-                >
-                    О НАС
-                </Link>
-                <Link :href="route('Calendars')" :active="route().current('Calendars')"
-                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
-                >
-                    ЗАПИСАТЬСЯ
-                </Link>
+                </template>
 
+                <template v-if="$page.props.auth?.user.role!=='client'">
+                    <Link :href="route('dashboard')" :active="route().current('dashboard')"
+                          class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
+                    >
+                        ПАНЕЛЬ АДМИНИСТРАТОРА
+                    </Link>
+                </template>
 
-                <Link :href="route('CategoryPage')" :active="route().current('CategoryPage')"
-                      v-if="store.isAuth && store.isAdmin"
-                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
-                >
-                    Категории
-                </Link>
+                <!--                <Link :href="route('CategoryPage')" :active="route().current('CategoryPage')"-->
+                <!--                      v-if="store.isAuth && store.isAdmin"-->
+                <!--                      class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"-->
+                <!--                >-->
+                <!--                    Категории-->
+                <!--                </Link>-->
             </nav>
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-center">
                 <template v-if="!$page.props.auth?.user">

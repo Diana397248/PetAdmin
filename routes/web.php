@@ -145,7 +145,7 @@ Route::middleware([
 
 
     // TODO REMOVE
-    Route::get('/test2', function () {
+    Route::get('/cabinet/UserProfile', function () {
         return Inertia::render('Cabinet/Index');
     })->name('UserProfile');
 
