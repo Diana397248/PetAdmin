@@ -20,7 +20,7 @@ class MedicalHistoryController extends Controller
 		$histories = $this->medicalHistoryService->storeHistory($petId, $request->histories);
 
 		return response()->json([
-			'message' => 'Medical Histories successfully saved!',
+			'message' => 'Истории болезни успешно сохранены!',
 			'histories' => $histories
 		], 200);
 	}

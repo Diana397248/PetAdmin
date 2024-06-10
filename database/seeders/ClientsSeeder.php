@@ -16,9 +16,16 @@ class ClientsSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 5; $i++) {
+        $userNames = [
+            "Смирнов В. П.",
+            "Кузнецова Е. Н.",
+            "Петров А. М.",
+            "Соколова Т. И.",
+            "Волков Д. С.",
+        ];
+        for ($i = 0; $i < count($userNames); $i++) {
             $user = User::create([
-                'name' => $faker->name,
+                'name' => $userNames[$i],
                 'email' => 'test' . ($i + 1) . '@gmail.com',
                 'password' => Hash::make('testtest'),
             ]);

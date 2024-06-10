@@ -19,7 +19,7 @@ class SurgicalHistoryController extends Controller
 		$surgeries = $this->surgicalHistoryService->storeSurgeries($petId, $request->surgeries);
 
 		return response()->json([
-			'message' => 'Surgical Histories successfully saved!',
+			'message' => 'Хирургические истории успешно сохранены!',
 			'surgeries' => $surgeries
 		], 200);
 	}

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Species;
 use App\Models\Breed;
+use App\Models\Species;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class BreedsSeeder extends Seeder
 {
@@ -15,34 +15,38 @@ class BreedsSeeder extends Seeder
     public function run(): void
     {
         $breeds = [
-            'Cat' => ['Ragdoll', 'Exotic Shorthair', 'British Shorthair', 'Persian cat', 'Maine Coon'],
-            'Dog' => ['Affenpinscher', 'Afghan Hound', 'Airedale Terrier', 'Akita', 'Alaskan Klee Kai'],
-            'Bird' => ['Ostrich', 'Rhea', 'Cassowary', 'Emu', 'Kiwi'],
-            'Rabbit' => ['American', 'Argente Brun', 'Argente de Champagne', 'Argente Noir', 'Argente St Hubert'],
-            'Fish' => ['Swordfish', 'Atlantic cod', 'Mackerel', 'Trout', 'Atlantic salmon'],
-            'Reptile' => ['American alligator', 'Gopher tortoise', 'California kingsnake', 'Gila monster', 'Dorset sheep'],
-            'Horse' => ['American Milking Devon', 'Anatolian Black', 'Andalusian Black', 'Angus', 'Ankole-Watusi'],
-            'Cow' => ['American Angus', 'American Brahman', 'American Breed', 'American Milking Devon', 'American White Park'],
-            'Sheep' => ['Bannur Sheep', 'Barbados Black Belly', 'Cheviot Sheep', 'Columbia Sheep', 'Corriedale Sheep'],
-            'Goat' => ['Alpine Goat', 'Belgian Fawn Goat', 'LaMancha Goat', 'Nigerian Dwarf Goat', 'Oberhasli Goat'],
-            'Pig' => ['American Yorkshire', 'Angeln Saddleback', 'Appalachian English', 'Arapawa Island', 'Arikara'],
-            'Chicken' => ['Australorp', 'Barnevelder', 'Brahma', 'Cochin', 'Leghorn'],
-            'Duck' => ['Abacot Ranger', 'Aylesbury', 'Bali', 'Black East Indian', 'Blue Swedish'],
-            'Turkey' => ['Auburn', 'Black', 'Bourbon Red', 'Bronze', 'Narragansett'],
-            'Guinea Pig' => ['Abyssinian', 'American', 'Coronet', 'Peruvian', 'Silkie'],
-            'Hamster' => ['Campbell\'s Dwarf', 'Chinese', 'Roborovski', 'Syrian', 'Winter White Russian Dwarf'],
-            'Ferret' => ['Albino', 'Black Sable', 'Champagne', 'Chocolate', 'Sable'],
-            'Chinchilla' => ['Standard Gray', 'Beige', 'Black Velvet', 'Violet', 'White'],
-            'Parrot' => ['African Grey', 'Amazon', 'Budgerigar', 'Cockatiel', 'Cockatoo'],
-            'Turtle' => ['African Aquatic Sideneck', 'Asian Box', 'Eastern Box', 'Mississippi Map', 'Russian']
+            "Кошка" => ["Рэгдолл", "Экзотическая короткошерстная", "Британская короткошерстная", "Персидская кошка", "Мейн-кун"],
+            "Собака" => ["Аффенпинчер", "Афганская борзая", "Эрдельтерьер", "Акита", "Аляскинский Кли Кай"],
+            "Птица" => ["Страус", "Рея", "Казуар", "Эму", "Киви"],
+            "Кролик" => ["Американский", "Аржантей Брюн", "Аржантей де Шампань", "Аржантей Нуар", "Аржантей Сент-Хьюберт"],
+            "Рыба" => ["Рыба-меч", "Атлантическая треска", "Макрель", "Форель", "Атлантический лосось"],
+            "Рептилия" => ["Американский аллигатор", "Черепаха-гофер", "Калифорнийская королевская змея", "Гила-монстр", "Дорсетская овца"],
+            "Лошадь" => ["Американский дойный Девон", "Анатолийский черный", "Андалузский черный", "Ангус", "Анколь-Ватуси"],
+            "Корова" => ["Американский ангус", "Американский Брахман", "Американская порода", "Американский дойный Девон", "Американский Белый Парк"],
+            "Овца" => ["Баннурская овца", "Барбадосская Черная Белли", "Чевиотская овца", "Колумбийская овца", "Корридейлская овца"],
+            "Коза" => ["Альпийская коза", "Бельгийская палевая коза", "ламанчская коза", "Нигерийская карликовая коза", "Оберхаслийская коза"],
+            "Свинья" => ["Американская йоркширская коза", "Ангельская седельная коза", "Аппалачская английская коза", "Остров Арапава", "Арикара"],
+            "Цыпленок" => ["Австралорп", "Барневельдер", "Брахма", "Кочин", "Ливорно"],
+            "Утка" => ["Абакот Рейнджер", "Эйлсбери", "Бали", "Черная ост-индская", "Голубая шведская"],
+            "Индейка" => ['Каштановый', 'Черный', 'Бурбонский красный', 'Бронзовый', 'Наррагансеттский'],
+            "Морская свинка" => ["Абиссинская", "Американская", "Коронет", "Перуанская", "Силки"],
+            "Хомяк" => ["Карлик Кэмпбелла", "Китайский", "Роборовски", "Сирийский", "Зимний белый русский карлик"],
+            "Хорек" => ["Альбинос", "Черный соболь", "Шампанское", "Шоколад", "Соболь"],
+            "Шиншилла" => ["Стандартный серый", "Бежевый", "Черный бархат", "Фиолетовый", "Белый"],
+            "Попугай" => ["Африканский серый", "Амазонский", "Волнистый попугайчик", "Какаду"],
+            "Черепаха" => ["Африканский водный попугай", "Азиатский самец", "Восточный самец", "Карта Миссисипи", "Русский"]
         ];
 
-        foreach ($breeds as $speciesName => $breeds) {
-            $species = Species::where('name', $speciesName)->first();
+        foreach ($breeds as $speciesName=> $breedNames) {
+            $kind = Species::where('name', $speciesName)->first();
 
-            foreach ($breeds as $breedName) {
+            if(!$kind){
+                Log::error($speciesName);
+            }
+
+            foreach ($breedNames as $breedName) {
                 Breed::create([
-                    'species_id' => $species->id,
+                    'species_id' => $kind->id,
                     'name' => $breedName
                 ]);
             }

@@ -20,7 +20,7 @@ class GalleryController extends Controller
         $files = $this->galleryService->storeGallery($petId, $request->allFiles()['files']);
 
         return response()->json([
-            'message' => 'Photos uploaded successfully',
+            'message' => 'Фотографии успешно загружены',
             'files' => $files
         ], 200);
     }

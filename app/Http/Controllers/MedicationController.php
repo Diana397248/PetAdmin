@@ -21,7 +21,7 @@ class MedicationController extends Controller
 		$medications = $this->medicationService->storeMedication($petId, $request->medications);
 
 		return response()->json([
-			'message' => 'Medications successfully saved!',
+			'message' => 'Лекарства успешно сохранены!',
 			'medications' => $medications
 		], 200);
 	}

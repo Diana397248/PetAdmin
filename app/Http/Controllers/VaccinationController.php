@@ -18,7 +18,7 @@ class VaccinationController extends Controller
 	{
 		$vaccinations = $this->vaccinationService->storeVaccinations($petId, $request->vaccinations);
 		return response()->json([
-			'message' => 'Vaccinations successfully saved!',
+			'message' => 'Прививки успешно сохранены!',
 			'vaccinations' => $vaccinations
 		], 200);
 	}

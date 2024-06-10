@@ -45,25 +45,25 @@ class ItemController extends Controller
     public function store(ItemStoreRequest $request): JsonResponse
     {
         $item = $this->itemService->storeItem($request->validated());
-        return response()->json(['message' => 'Item successfully added!'], 201);
+        return response()->json(['message' => 'Услуга успешно добавлена!'], 201);
     }
 
     public function update(ItemUpdateRequest $request, $id): JsonResponse
     {
         $item = $this->itemService->updateItem($request->validated(), $id);
-        return response()->json(['message' => 'Item updated successfully'], 201);
+        return response()->json(['message' => 'Услуга успешно обновлена'], 201);
     }
 
     public function destroy($id): JsonResponse
     {
         $this->itemService->destroyItem($id);
-        return response()->json(['success' => 'Item deleted successfully'], 201);
+        return response()->json(['success' => 'Услуга успешно удалена'], 201);
     }
 
     public function bulkDelete(ItemBulkDeleteRequest $request): JsonResponse
     {
         $this->itemService->bulkDeleteItems($request->validated()['selectedIds']);
-        return response()->json(['success' => 'Selected items deleted successfully'], 201);
+        return response()->json(['success' => 'Выбранные услуги успешно удалены'], 201);
     }
 
     public function fetchAllItems(ItemFetchAllRequest $request): JsonResponse

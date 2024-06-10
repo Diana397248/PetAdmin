@@ -27,7 +27,7 @@ class AppointmentController extends Controller
         $this->appointmentService->storeAppointment($validatedData);
 
         return response()->json([
-            'message' => 'Event created successfully',
+            'message' => 'Событие успешно создано',
         ], 201);
     }
 
@@ -73,7 +73,7 @@ class AppointmentController extends Controller
         $this->appointmentService->updateAppointment($id, $validatedData);
 
         return response()->json([
-            'message' => 'Appointment updated successfully',
+            'message' => 'Встреча успешно обновлена',
         ], 200);
     }
 
@@ -82,7 +82,7 @@ class AppointmentController extends Controller
         $this->appointmentService->deleteAppointment($id);
 
         return response()->json([
-            'message' => 'Appointment deleted successfully',
+            'message' => 'Встреча успешно удалена',
         ], 200);
     }
 }

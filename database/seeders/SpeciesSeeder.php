@@ -13,7 +13,8 @@ class SpeciesSeeder extends Seeder
      */
     public function run(): void
     {
-        $species = ['Cat', 'Dog', 'Bird', 'Rabbit', 'Fish', 'Reptile', 'Horse', 'Cow', 'Sheep', 'Goat', 'Pig', 'Chicken', 'Duck', 'Turkey', 'Guinea Pig', 'Hamster', 'Ferret', 'Chinchilla', 'Parrot', 'Turtle'];
+//        $species = ['Cat', 'Dog', 'Bird', 'Rabbit', 'Fish', 'Reptile', 'Horse', 'Cow', 'Sheep', 'Goat', 'Pig', 'Chicken', 'Duck', 'Turkey', 'Guinea Pig', 'Hamster', 'Ferret', 'Chinchilla', 'Parrot', 'Turtle'];
+        $species = ["Кошка", "Собака", "Птица", "Кролик", "Рыба", "Рептилия", "Лошадь", "Корова", "Овца", "Коза", "Свинья", "Цыпленок", "Утка", "Индейка", "Морская свинка", "Хомяк", "Хорек", "Шиншилла", "Попугай", "Черепаха"];
 
         foreach ($species as $specie) {
             Species::create(['name' => $specie]);

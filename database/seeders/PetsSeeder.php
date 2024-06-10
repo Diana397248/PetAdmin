@@ -18,7 +18,8 @@ class PetsSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        $genders = ['male', 'female'];
+//        $genders = ['male', 'female'];
+        $genders = ["мужской", "женский"];
         $species = Species::all();
         $clients = Client::all();
 
