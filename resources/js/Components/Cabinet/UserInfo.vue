@@ -55,6 +55,7 @@
 import Field from "@/Components/Cabinet/Field.vue"
 import UserForm from "@/Components/Cabinet/UserForm.vue"
 import {onMounted, ref} from "vue";
+import {router} from "@inertiajs/vue3";
 
 const isEdit = ref(false)
 
@@ -66,6 +67,7 @@ const changeMode = () => {
 const updateUser = () => {
     getUserProfile();
     isEdit.value = false;
+    router.get(route('UserProfile'))
 }
 const profileData = ref({});
 

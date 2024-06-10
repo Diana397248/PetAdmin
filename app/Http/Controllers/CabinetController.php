@@ -86,7 +86,6 @@ class CabinetController extends Controller
     public function updateUserProfile(UserProfileUpdateRequest $request)
     {
         $formData = $request->validated();
-        $formData = mb_convert_encoding($formData, "UTF-8", "auto");
         $currentUser = Auth::user();
         $userProfile = Client::where('user_id', $currentUser->id)->firstOrFail();
 
@@ -95,10 +94,10 @@ class CabinetController extends Controller
             $updatedUserName = $updatedUserName . $formData['second_name'];
         }
         if ($formData['name']) {
-            $updatedUserName = $updatedUserName . " " . strtoupper($formData['name'][0]);
+            $updatedUserName = $updatedUserName . " " . strtoupper(mb_substr($formData['name'], 0, 1)) . ".";
         }
         if ($formData['patronymic']) {
-            $updatedUserName = $updatedUserName . " " . strtoupper($formData['patronymic'][0]);
+            $updatedUserName = $updatedUserName . " " . strtoupper(mb_substr($formData['patronymic'], 0, 1)) . ".";
         }
         $currentUser->name = $updatedUserName;
         $currentUser->save();
