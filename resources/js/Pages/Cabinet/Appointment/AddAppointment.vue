@@ -30,43 +30,16 @@
                     <v-form v-model="valid" @submit.prevent>
                         <v-container>
                             <!--Блок формы-->
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-sheet class="pa-2">
-                                        <v-text-field
-                                            v-model="model.firstname"
-                                            :counter="10"
-                                            :rules="rules.firstname"
-                                            label="ФИО"
-                                            hide-details
-                                            required
-                                        ></v-text-field>
-                                    </v-sheet>
-                                </v-col>
-                            </v-row>
 
 
                             <v-row>
                                 <v-col
-                                    cols="6"
-                                >
-                                    <v-text-field
-                                        v-model="model.phone"
-                                        :counter="10"
-                                        :rules="rules.phone"
-                                        label="+7(999) 999 99 99"
-                                        hide-details
-                                        required
-                                    ></v-text-field>
-                                </v-col>
-
-                                <v-col
-                                    cols="6"
+                                    cols="12"
                                     class="d-flex justify-center"
                                 >
                                     <input v-model="model.date" type="datetime-local" name="start_time"
-                                           style="background-color: #F6F5F6"
-                                           class="d-block w-100 mx-2 px-2 text-sm  focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                                           style="background-color: #F6F5F6; height: 55px"
+                                           class="d-block w-100  text-sm  focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
                                            :class="rules.date === true ? 'border-red-500' : 'border-gray-300'">
                                     <!--                                               :class="errors.start_time ? 'border-red-500' : 'border-gray-300'">-->
                                     <!--                                        todo-->
@@ -80,6 +53,8 @@
                                 <v-col cols="12"
                                        class="mt-5">
                                     <v-textarea
+                                        class="text-area-description"
+                                        auto-grow
                                         v-model="model.desc"
                                         :rules="rules.desc"
                                         label="Кратко опишите проблему"
@@ -260,5 +235,7 @@ const model = reactive({
 </script>
 
 <style scoped>
-
+.text-area-description:deep(textarea) {
+    padding: 15px 10px 0!important;
+}
 </style>
