@@ -194,9 +194,9 @@ const editItem = (id) => {
                                         <label for="checkbox-all" class="sr-only">checkbox</label>
                                     </div>
                                 </th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Имя</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Описание</th>
-                                <th scope="col" class="px-4 py-3 w-[20%]">Количетсво</th>
+                                <th scope="col" class="px-4 py-3 w-[35%]">Имя</th>
+                                <th scope="col" class="px-4 py-3 w-[35%]">Описание</th>
+<!--                                <th scope="col" class="px-4 py-3 w-[20%]">Количетсво</th>-->
                                 <th scope="col" class="px-4 py-3 w-[40%]">Цена за шт</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Действия</span>
@@ -258,7 +258,7 @@ const editItem = (id) => {
                                     {{ item.item_name }}
                                 </td>
                                 <td class="px-4 py-1 lg:py-">{{ item.description }}</td>
-                                <td class="px-4 py-1 lg:py-3">{{ item.quantity }}</td>
+<!--                                <td class="px-4 py-1 lg:py-3">{{ item.quantity }}</td>-->
                                 <td class="px-4 py-1 lg:py-3">{{ item.unit_price }}</td>
                                 <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
                                     <Link :href="route('items.edit', { slug: item.slug })"
