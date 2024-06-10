@@ -225,7 +225,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <AppLayout title="Edit Pet">
+    <AppLayout title="Изменение питомца">
         <template #header>
             <h2 class="text-lg font-semibold leading-6 text-gray-900">
                 Изменить домашнее животное: {{ pet.name }}

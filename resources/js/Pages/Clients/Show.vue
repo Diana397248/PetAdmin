@@ -13,10 +13,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <AppLayout title="Show Client">
+  <AppLayout title="Просмотр клиента">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Show Client: {{ client.name }}
+        Клиент: {{ client.name }}
       </h2>
     </template>
 

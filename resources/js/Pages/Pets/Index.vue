@@ -34,7 +34,7 @@ const fetchPets = async (page = 1) => {
 const handleSearch = async ({search, keywords}) => {
     if (!keywords) {
         // Show a toast error
-        toast.warning('Enter a search term')
+        toast.warning('Введите поисковый запрос')
     } else {
         // If not empty, perform the search
         pets.value = await search('/pets/search');
@@ -67,21 +67,21 @@ const togglePetSelection = (PetId) => {
 
 const deletePet = (id) => {
     Swal.fire({
-        title: 'Delete Pet?',
-        text: 'Are you sure you want to delete this pet?',
+        title: 'Удалить питомца?',
+        text: 'Вы уверены, что хотите удалить этого питомца?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it',
-        cancelButtonText: 'No, keep it'
+        confirmButtonText: 'Да, удалить',
+        cancelButtonText: 'Отмена'
     }).then((result) => {
         if (result.isConfirmed) {
             axios.delete(`/pets/${id}`)
                 .then(response => {
-                    Swal.fire('Deleted!', response.data.message, 'success');
+                    Swal.fire('Удалено!', response.data.message, 'success');
                     fetchPets();
                 })
                 .catch(error => {
-                    Swal.fire('Error!', error.response.data.message, 'error');
+                    Swal.fire('Ошибка!', error.response.data.message, 'error');
                 });
         }
     });
@@ -90,17 +90,17 @@ const deletePet = (id) => {
 const handleBulkDelete = () => {
     if (selectedPetIds.value.length > 0) {
         Swal.fire({
-            title: 'Delete Selected Pets?',
-            text: `You have selected ${selectedPetIds.value.length} pet(s). Do you want to continue?`,
+            title: 'Удалить выбранных домашних животных?',
+            text: `Вы выбрали ${selectedPetIds.value.length} животных. Вы хотите продолжить?`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete them',
-            cancelButtonText: 'No, keep them'
+            confirmButtonText: 'Да, удалить',
+            cancelButtonText: 'Отмена'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete('/pets/bulk-delete/selected', {data: {selectedIds: selectedPetIds.value}})
                     .then((response) => {
-                        Swal.fire('Deleted!', response.data.message, 'success')
+                        Swal.fire('Удалено!', response.data.message, 'success')
                         selectedPetIds.value = []
                         anyCheckboxSelected.value = false
                         fetchPets()
@@ -109,7 +109,7 @@ const handleBulkDelete = () => {
                         });
                     })
                     .catch((error) => {
-                        Swal.fire('Error!', error.response.data.message, 'error')
+                        Swal.fire('Ошибка!', error.response.data.message, 'error')
                         console.error('Error:', error);
                     });
             }
@@ -119,7 +119,7 @@ const handleBulkDelete = () => {
 </script>
 
 <template>
-    <AppLayout title="Pets">
+    <AppLayout title="Питомцы">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Питомцы
@@ -272,18 +272,18 @@ const handleBulkDelete = () => {
                                     <Link :href="route('pets.show', { slug: pet.slug })"
                                           class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
                                         <EyeIcon class="w-5 h-5 mr-1"/>
-                                        <span class="sr-only">View</span>
+                                        <span class="sr-only">Вид</span>
                                     </Link>
                                     <Link :href="route('pets.edit', { slug: pet.slug })"
                                           class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
                                         <PencilSquareIcon class="w-5 h-5 text-indigo-500 hover:text-indigo-800 mr-1"/>
-                                        <span class="sr-only">Edit</span>
+                                        <span class="sr-only">Редактировать</span>
                                     </Link>
                                     <button @click="deletePet(pet.id)"
                                             class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                             type="button">
                                         <TrashIcon class="w-5 h-5 text-red-500 hover:text-red-800"/>
-                                        <span class="sr-only">Delete</span>
+                                        <span class="sr-only">Удалить</span>
                                     </button>
                                 </td>
                             </tr>

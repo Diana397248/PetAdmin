@@ -119,7 +119,7 @@ const handleBulkDelete = () => {
 </script>
 
 <template>
-    <AppLayout title="Clients">
+    <AppLayout title="Клиенты">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Клиенты

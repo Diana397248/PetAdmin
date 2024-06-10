@@ -103,7 +103,7 @@ const editRole = (val, userId) => {
 </script>
 
 <template>
-    <AppLayout title="Pets">
+    <AppLayout title="Пользователи">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Пользователи

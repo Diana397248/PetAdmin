@@ -33,7 +33,7 @@ const fetchItems = async (page = 1) => {
 const handleSearch = async ({search, keywords}) => {
     if (!keywords) {
         // Show a toast error
-        toast.warning('Enter a search term')
+        toast.warning('Введите поисковый запрос')
     } else {
         // If not empty, perform the search
         items.value = await search('/items/search');
@@ -66,21 +66,21 @@ const togglePetSelection = (ItemId) => {
 
 const deleteItem = (id) => {
     Swal.fire({
-        title: 'Delete Item?',
-        text: 'Are you sure you want to delete this item?',
+        title: 'Удалить услугу?',
+        text: 'Вы уверены, что хотите удалить этоту услугу?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it',
-        cancelButtonText: 'No, keep it'
+        confirmButtonText: 'Да, удалить',
+        cancelButtonText: 'Отмена'
     }).then((result) => {
         if (result.isConfirmed) {
             axios.delete(`/items/${id}`)
                 .then(response => {
-                    Swal.fire('Deleted!', response.data.message, 'success');
+                    Swal.fire('Удалено!', response.data.message, 'success');
                     fetchItems();
                 })
                 .catch(error => {
-                    Swal.fire('Error!', error.response.data.message, 'error');
+                    Swal.fire('Ошибка!', error.response.data.message, 'error');
                 });
         }
     });
@@ -89,17 +89,17 @@ const deleteItem = (id) => {
 const handleBulkDelete = () => {
     if (selectedItemIds.value.length > 0) {
         Swal.fire({
-            title: 'Delete Selected Items?',
-            text: `You have selected ${selectedItemIds.value.length} item(s). Do you want to continue?`,
+            title: 'Удалить выбранные услуги?',
+            text: `Вы выбрали ${selectedItemIds.value.length} услуг(и). Вы хотите продолжить?`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete them',
-            cancelButtonText: 'No, keep them'
+            confirmButtonText: 'Да, удалить',
+            cancelButtonText: 'Отмена'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete('/items/bulk-delete/selected', {data: {selectedIds: selectedItemIds.value}})
                     .then((response) => {
-                        Swal.fire('Deleted!', response.data.message, 'success')
+                        Swal.fire('Удалено!', response.data.message, 'success')
                         selectedItemIds.value = []
                         anyCheckboxSelected.value = false
                         fetchItems()
@@ -108,7 +108,7 @@ const handleBulkDelete = () => {
                         });
                     })
                     .catch((error) => {
-                        Swal.fire('Error!', error.response.data.message, 'error')
+                        Swal.fire('Ошибка!', error.response.data.message, 'error')
                         console.error('Error:', error);
                     });
             }
@@ -122,7 +122,7 @@ const editItem = (id) => {
 </script>
 
 <template>
-    <AppLayout title="Items">
+    <AppLayout title="Услуги">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Услуги
@@ -219,8 +219,7 @@ const editItem = (id) => {
                                                               d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                                                     </svg>
                                                 </div>
-                                                <h1 class="mt-3 text-lg text-gray-400 dark:text-white">No items
-                                                    found</h1>
+                                                <h1 class="mt-3 text-lg text-gray-400 dark:text-white">Ничего не найдено</h1>
                                                 <div
                                                     class="flex flex-col sm:flex-row items-center mt-4 sm:mx-auto gap-y-3 sm:gap-x-3">
                                                     <button @click="handleClear"
