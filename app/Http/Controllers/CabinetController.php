@@ -88,6 +88,20 @@ class CabinetController extends Controller
         $formData = $request->validated();
         $currentUser = Auth::user();
         $userProfile = Client::where('user_id', $currentUser->id)->firstOrFail();
+
+        $updatedUserName = "";
+        if ($formData['second_name']) {
+            $updatedUserName = $updatedUserName . $formData['second_name'];
+        }
+        if ($formData['name']) {
+            $updatedUserName = $updatedUserName . " " . strtoupper($formData['name'][0]);
+        }
+        if ($formData['patronymic']) {
+            $updatedUserName = $updatedUserName . " " . strtoupper($formData['patronymic'][0]);
+        }
+        $currentUser->name = $updatedUserName;
+        $currentUser->save();
+
         $userProfile->name = $formData['name'];
         $userProfile->second_name = $formData['second_name'];
         $userProfile->patronymic = $formData['patronymic'];
