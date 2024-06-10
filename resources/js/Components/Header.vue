@@ -39,7 +39,7 @@
                 </template>
 
                 <template v-if="$page.props.auth?.user.role!=='client'">
-                    <Link :href="route('dashboard')" :active="route().current('dashboard')"
+                    <Link href="/"
                           class="me-8 py-2 text-black text-decoration-none fs-4 fw-bold"
                     >
                         ПАНЕЛЬ АДМИНИСТРАТОРА

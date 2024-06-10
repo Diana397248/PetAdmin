@@ -21,13 +21,17 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $userRole = Auth::user()->role;
-                if ($userRole === 'doctor' ||
-                    $userRole === 'cashier' ||
-                    $userRole === 'admin') {
-                    return redirect("/dashboard");
+                $authenticatable = Auth::user();
+                if ($authenticatable) {
+                    $userRole = $authenticatable->role;
+                    if ($userRole === 'admin') {
+                        return redirect("/clients");
+                    } elseif ($userRole === 'doctor')
+                        return redirect("/appointments");
+                    else
+                        return redirect("/cabinet");
                 }
-                return redirect("/cabinet");
+                return redirect("/cabinet/home");
             }
         }
 

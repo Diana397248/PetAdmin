@@ -25,7 +25,7 @@ class ItemUpdateRequest extends FormRequest
         return [
             'item_name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'quantity' => 'required|integer|min:0',
+//            'quantity' => 'required|integer|min:0', TODO
             'unit_price' => 'nullable|numeric|min:0',
         ];
     }

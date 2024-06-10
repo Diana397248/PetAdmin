@@ -27,13 +27,13 @@ export const validateForm = (form) => {
   }
 
   // Validate quantity
-  if (form.quantity === undefined || form.quantity === null || form.quantity === '') {
-    errors.value.quantity = 'This field is required';
-  } else if (typeof form.quantity !== 'number' || !Number.isInteger(form.quantity)) {
-      errors.value.quantity = 'This field must be a number';
-  } else if (form.quantity < 0) {
-      errors.value.quantity = 'This field cannot be less than 0';
-  }
+  // if (form.quantity === undefined || form.quantity === null || form.quantity === '') {
+  //   errors.value.quantity = 'This field is required';
+  // } else if (typeof form.quantity !== 'number' || !Number.isInteger(form.quantity)) {
+  //     errors.value.quantity = 'This field must be a number';
+  // } else if (form.quantity < 0) {
+  //     errors.value.quantity = 'This field cannot be less than 0';
+  // }
 
   // Validate unit_price to accept decimals
   if (form.unit_price === undefined || form.unit_price === null || form.unit_price === '') {

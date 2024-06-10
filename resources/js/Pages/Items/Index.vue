@@ -197,7 +197,7 @@ const editItem = (id) => {
                                 <th scope="col" class="px-4 py-3 w-[35%]">Имя</th>
                                 <th scope="col" class="px-4 py-3 w-[35%]">Описание</th>
 <!--                                <th scope="col" class="px-4 py-3 w-[20%]">Количетсво</th>-->
-                                <th scope="col" class="px-4 py-3 w-[40%]">Цена за шт</th>
+                                <th scope="col" class="px-4 py-3 w-[40%]">Цена</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Действия</span>
                                 </th>

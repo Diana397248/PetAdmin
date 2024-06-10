@@ -28,16 +28,18 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    //TODO
     $authenticatable = Auth::user();
     if ($authenticatable) {
         $userRole = $authenticatable->role;
-        if ($userRole === 'doctor' ||
-            $userRole === 'cashier' ||
-            $userRole === 'admin') {
-            return redirect("/dashboard");
-        }
-        return redirect("/cabinet");
+        if ($userRole === 'admin') {
+            return redirect("/clients");
+        } elseif ($userRole === 'doctor')
+            return redirect("/appointments");
+        else
+            return redirect("/cabinet");
     }
+
     return redirect("/cabinet/home");
 });
 

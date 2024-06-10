@@ -72,14 +72,14 @@ onMounted(() => {
                 placeholder="Item name">
               <span class="text-red-500 text-xs">{{ errors.item_name }}</span>
             </div>
-            <div class="w-full">
-              <label for="quantity" class="block mb-2 text-xs font-medium text-gray-400 dark:text-white">Количество</label>
-              <input v-model="updateForm.quantity" type="number" name="quantity" id="quantity"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                :class="errors.quantity ? 'border-red-500' : ''"
-                placeholder="Item quantity">
-              <span class="text-red-500 text-xs">{{ errors.quantity }}</span>
-            </div>
+<!--            <div class="w-full">-->
+<!--              <label for="quantity" class="block mb-2 text-xs font-medium text-gray-400 dark:text-white">Количество</label>-->
+<!--              <input v-model="updateForm.quantity" type="number" name="quantity" id="quantity"-->
+<!--                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"-->
+<!--                :class="errors.quantity ? 'border-red-500' : ''"-->
+<!--                placeholder="Item quantity">-->
+<!--              <span class="text-red-500 text-xs">{{ errors.quantity }}</span>-->
+<!--            </div>-->
             <div class="w-full">
               <label for="unit_price" class="block mb-2 text-xs font-medium text-gray-400 dark:text-white">Цена</label>
               <input v-model="updateForm.unit_price" type="text" name="unit_price" id="unit_price"
