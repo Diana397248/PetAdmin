@@ -2,7 +2,6 @@
     <v-card class="pa-8 card ">
         <v-card-text>
             <v-row>
-
                 <v-col class="d-flex flex-column align-center justify-content-center " cols="4">
                     <image-input v-model="model.img"/>
                 </v-col>
@@ -19,22 +18,41 @@
                             v-model="model.name"
                             :rules="rules.name"
                             label="имя"/>
-                        <v-text-field
-                            v-model="model.type"
+
+                        <v-select
+                            v-model="selectedTypeID"
                             :rules="rules.type"
-                            label="тип"/>
-                        <v-text-field
+                            label="тип"
+                            :items="matchingSpecies"
+                            item-title="name"
+                            item-value="id"
+                        ></v-select>
+
+
+                        <v-select
+                            label="порода"
+                            v-model="selectedBreedID"
+                            :rules="rules.breed"
+                            :items="matchingBreeds"
+                            item-title="name"
+                            item-value="id"
+                        ></v-select>
+
+                        <v-select
+                            label="пол"
                             v-model="model.gender"
                             :rules="rules.gender"
-                            label="пол"/>
-                        <v-text-field
-                            v-model="model.breed"
-                            :rules="rules.breed"
-                            label="порода"/>
-                        <v-number-input
+                            :items="['Мужской', 'Женский', 'Никто']"
+                        ></v-select>
+
+                        <VNumberInput
+                            :max="100"
+                            :min="1"
                             v-model="model.age"
                             :rules="rules.age"
-                            label="возраст"/>
+                            label="возраст"
+                        ></VNumberInput>
+
                         <AddPetBtn class="mt-2" size="small" @click="createPet"/>
                     </v-form>
                 </v-col>
@@ -47,9 +65,71 @@
 import CloseIcon from "@/Components/Cabinet/Icons/CloseIcon.vue"
 import ImageInput from "@/Components/Cabinet/Base/ImageInput.vue"
 import AddPetBtn from "@/Components/Cabinet/Base/AddPetBtn.vue"
-
-import {reactive, ref, watch} from 'vue'
+import {usePage} from '@inertiajs/vue3'
+import {computed, nextTick, onMounted, reactive, ref, watch} from 'vue'
 import {toast} from "vue3-toastify";
+import {VNumberInput} from 'vuetify/labs/VNumberInput'
+
+const page = usePage()
+const userId = computed(() => page.props.auth.user.id)
+
+const isSubmitting = ref(false)
+const selectedBreed = ref(null);
+const matchingSpecies = ref([]);
+const matchingBreeds = ref([]);
+const loadingBreeds = ref(false);
+
+const selectedTypeID = ref(1);
+const selectedBreedID = ref(null);
+
+const model = reactive({
+    name: "",
+    type: "",
+    gender: "Мужской",
+    breed: "",
+    age: "",
+    img: "",
+    species_id: 1, // TODO
+    client_id: 1,
+    breed_id: 1,
+})
+
+onMounted(() => {
+    fetchAllSpecies()
+})
+const fetchAllSpecies = async () => {
+    const response = await axios.get('/pets/fetchAllSpecies');
+    matchingSpecies.value = response.data;
+    await nextTick();
+}
+
+
+const fetchSpecies = async (query) => {
+    const response = await axios.get(`/pets/species?name=${query}`);
+    const data = response.data;
+    matchingSpecies.value = data.slice(0, 10);
+};
+const fetchBreeds = async (speciesId) => {
+    loadingBreeds.value = true;
+
+    const response = await axios.get(`/pets/breeds?species_id=${speciesId}`);
+    const data = response.data;
+
+    matchingBreeds.value = data;
+    await nextTick();
+
+    loadingBreeds.value = false;
+};
+
+watch(selectedTypeID, async () => {
+    selectedBreedID.value = null
+    if (selectedTypeID.value) {
+        await fetchBreeds(selectedTypeID.value);
+    } else {
+        console.log('Виды не выбраны')
+    }
+});
+
 
 const emmit = defineEmits([
     'close',
@@ -59,9 +139,9 @@ const emmit = defineEmits([
 const createPet = () => {
     const pet = {
         //TODO:
-        species_id: 1,
-        client_id: 1,
-        breed_id: 1,
+        species_id: selectedTypeID.value,
+        client_id: userId.value || 1,
+        breed_id: selectedBreedID.value || 1,
 
         "name": model.name,
         "type": model.type,
@@ -117,25 +197,25 @@ const avatar = ref(
 const rules = {
     name: [
         value => {
-            if (false) return true
+            if (value.trim() !== "") return true
             return 'Поле должно быть заполнено.'
         }
     ],
     type: [
         value => {
-            if (false) return true
+            if (true) return true
             return 'Поле должно быть заполнено.'
         }
     ],
     gender: [
         value => {
-            if (false) return true
+            if (true) return true
             return 'Выберите пол животного.'
         }
     ],
     breed: [
         value => {
-            if (false) return true
+            if (value !== null) return true
             return 'Введите породу животного.'
         }
     ],
@@ -147,14 +227,6 @@ const rules = {
     ],
 }
 
-const model = reactive({
-    name: "",
-    type: "",
-    gender: "",
-    breed: "",
-    age: "",
-    img: "",
-})
 
 watch(avatar, (newValues, prevValues) => {
     console.log(newValues, prevValues)
