@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
     <div class="px-4 py-5 sm:p-6">
         <template v-if="pet.medications.length === 0">
-            <p class="text-center text-gray-500 py-4">No images found.</p>
+            <p class="text-center text-gray-500 py-4">Лекарств не найдено.</p>
         </template>
         <template v-else>
             <table class="min-w-full divide-y divide-gray-300">

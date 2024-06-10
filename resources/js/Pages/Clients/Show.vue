@@ -23,11 +23,14 @@ const props = defineProps({
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 lg:col-span-3">
         <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-          <img class="object-cover object-center w-full h-56"
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-            alt="avatar">
 
-          <div class="flex items-center px-6 py-3 bg-gray-900">
+
+            <img v-if="client.photo" class="object-cover object-center w-full h-56" :src="'/'+pet.photo"
+                 alt="avatar">
+            <img v-else src="/assets/no_photo.jpg" class="object-cover object-center w-full h-56">
+
+
+            <div class="flex items-center px-6 py-3 bg-gray-900">
             <UserIcon class="w-6 h-6 text-white" />
 
             <h1 class="mx-3 text-lg font-semibold text-white">{{ client.name }}</h1>

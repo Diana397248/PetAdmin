@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
   <div class="px-4 py-5 sm:p-6">
     <template v-if="pet.medical_history.length === 0">
-      <p class="text-center text-gray-500 py-4">No medical history found.</p>
+      <p class="text-center text-gray-500 py-4">История болезни не найдена.</p>
     </template>
     <template v-else>
       <table class="min-w-full divide-y divide-gray-300">

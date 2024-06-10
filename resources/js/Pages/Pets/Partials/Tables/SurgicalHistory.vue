@@ -14,7 +14,7 @@ const props = defineProps({
   <div class="px-4 py-5 sm:p-6">
     <template v-if="pet.surgical_history.length === 0">
       <p class="py-4 text-center text-gray-500">
-        No surgical history found.
+        История хирургического вмешательства не обнаружена.
       </p>
     </template>
     <template v-else>

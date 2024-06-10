@@ -173,8 +173,8 @@ onMounted(async () => {
                             <tr>
                                 <th scope="col" class="px-4 py-3 w-[20%]">Ветеринар</th>
                                 <th scope="col" class="px-4 py-3 w-[20%]">Клиент</th>
-                                <th scope="col" class="px-4 py-3 w-[40%]">Дата</th>
-                                <th scope="col" class="px-4 py-3 w-[40%]">Описание</th>
+                                <th scope="col" class="px-4 py-3 w-[20%]">Дата</th>
+                                <th scope="col" class="px-4 py-3 w-[30%]">Описание</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Навигация</span>
                                 </th>
@@ -213,13 +213,13 @@ onMounted(async () => {
                                     }}
                                 </td>
                                 <!--                                <td class="px-4 py-1 lg:py-3">{{ moment(pet.created_at).format('MMMM Do, YYYY') }}</td>-->
-                                <td class="px-4 py-4 lg:py-3 flex items-center justify-start lg:justify-end">
+                                <td class="px-4 py-4 lg:py-3 flex items-center justify-start ">
 <!--                                    TODO-->
-<!--                                    <Link :href="route('pets.show', { slug: 'francisco-1' })"-->
-<!--                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">-->
-<!--                                        <EyeIcon class="w-5 h-5 mr-1"/>-->
-<!--                                        <span class="sr-only">View</span>-->
-<!--                                    </Link>-->
+                                    <Link :href="route('clients.show', { slug: ap.client.slug })"
+                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">
+                                        <EyeIcon class="w-5 h-5 mr-1"/>
+                                        <span class="sr-only">View</span>
+                                    </Link>
                                     <!--                                    <Link :href="route('pets.edit', { slug: pet.slug })"-->
                                     <!--                                          class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100">-->
                                     <!--                                        <PencilSquareIcon class="w-5 h-5 text-indigo-500 hover:text-indigo-800 mr-1"/>-->

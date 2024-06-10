@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
 	<div class="px-4 py-5 sm:p-6">
 		<template v-if="pet.images.length === 0">
-			<p class="text-center text-gray-500 py-4">No images found.</p>
+			<p class="text-center text-gray-500 py-4">Картинок не найдено.</p>
 		</template>
 		<template v-else>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
