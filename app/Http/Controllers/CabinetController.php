@@ -86,6 +86,7 @@ class CabinetController extends Controller
     public function updateUserProfile(UserProfileUpdateRequest $request)
     {
         $formData = $request->validated();
+        $formData = mb_convert_encoding($formData, "UTF-8", "auto");
         $currentUser = Auth::user();
         $userProfile = Client::where('user_id', $currentUser->id)->firstOrFail();
 
