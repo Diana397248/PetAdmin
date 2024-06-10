@@ -57,7 +57,7 @@ const props = defineProps({
           </div>
           <hr />
           <div class="px-6 py-4">
-            <span class="text-sm font-semibold text-gray-400">Notes</span>
+            <span class="text-sm font-semibold text-gray-400">О себе</span>
             <p class="text-sm">{{ client.notes }}</p>
           </div>
         </div>

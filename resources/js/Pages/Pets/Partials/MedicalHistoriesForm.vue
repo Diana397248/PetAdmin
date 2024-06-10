@@ -149,8 +149,8 @@ const fetchHistories = async () => {
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-5">
-					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">Notes</label>
-					<textarea v-model="history.notes" name="notes" id="notes" placeholder="Notes" rows="5"
+					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">О себе</label>
+					<textarea v-model="history.notes" name="notes" id="notes" placeholder="О себе" rows="5"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`histories[${index}].notes`] }"></textarea>
 					<span class="text-red-500 text-xs">{{ errors[`histories[${index}].notes`] }}</span>
