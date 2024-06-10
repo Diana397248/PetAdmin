@@ -9,12 +9,12 @@
                     -->
                     <Picture
                         size="250"
-                        :img="props.pet.photo"/>
+                        :img="'/'+props.pet.photo"/>
                 </v-col>
 
                 <v-col class="d-flex flex-column gap-5">
                     <p class="pet-name">{{ props.pet.name }}</p>
-                    <div class="d-flex flex-column ga-3" >
+                    <div class="d-flex flex-column ga-3">
                         <Field label="тип" :text="props.pet?.breed?.name"/>
                         <Field label="порода" :text="props.pet?.species?.name"/>
                         <Field v-if="props.pet?.age" label="возраст" :text="props.pet?.age"/>

@@ -96,6 +96,7 @@ const model = reactive({
 
 onMounted(() => {
     fetchAllSpecies()
+    fetchBreeds(selectedTypeID.value)
 })
 const fetchAllSpecies = async () => {
     const response = await axios.get('/pets/fetchAllSpecies');
