@@ -99,15 +99,17 @@ const fetchAllVets = async () => {
     matchingVets.value = response.data;
 };
 
+const searchVets = async (query) => {
+    const response = await axios.get('/appointments/searchVets', {params: {query}});
+    matchingVets.value = response.data;
+};
+
 const searchClients = async (query) => {
     const response = await axios.get('/appointments/searchClients', {params: {query}});
     matchingClients.value = response.data;
 };
 
-const searchVets = async (query) => {
-    const response = await axios.get('/appointments/searchVets', {params: {query}});
-    matchingVets.value = response.data;
-};
+
 
 const getClientName = (client) => {
     let result = ""
