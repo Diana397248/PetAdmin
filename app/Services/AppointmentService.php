@@ -30,6 +30,11 @@ class AppointmentService
             if ($client) {
                 $appointmentQuery = $appointmentQuery->where('client_id', $client->id);
             }
+        } else if (!$all && Auth::user()->role === 'doctor') {
+            $vet = Vet::where('user_id', Auth::user()->id)->first();
+            if ($vet) {
+                $appointmentQuery = $appointmentQuery->where('vet_id', $vet->id);
+            }
         }
 
         return $appointmentQuery->orderBy('start_time', 'ASC')->get();
