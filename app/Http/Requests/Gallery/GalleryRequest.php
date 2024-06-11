@@ -24,7 +24,7 @@ class GalleryRequest extends FormRequest
     {
         return [
             'files' => 'required|array',
-            'files.*' => 'mimes:jpg,png,jpeg|max:1024',
+            'files.*' => 'mimes:jpg,png,jpeg|max:90024',
         ];
     }
 
@@ -33,7 +33,7 @@ class GalleryRequest extends FormRequest
         return [
             'files.required' => 'Select an image to upload.',
             'files.*.mimes' => 'The uploaded file must be a file of type: jpg, png, jpeg.',
-            'files.*.max' => 'The uploaded file must not be greater than 1048 kilobytes.',
+            'files.*.max' => 'The uploaded file must not be greater than 90024 kilobytes.',
         ];
     }
 }

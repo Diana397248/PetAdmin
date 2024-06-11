@@ -123,7 +123,7 @@ const fetchVaccinations = async () => {
 				<div class=" col-span-12 md:col-span-6 lg:col-span-2">
 					<label for="vaccine_name" class="mb-2 block text-sm font-medium text-gray-500">Название вакцины</label>
 					<input v-model="vaccination.vaccine_name" name="vaccine_name" id="vaccine_name"
-						placeholder="Vaccine Name"
+						placeholder="Название вакцины"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`vaccinations[${index}].vaccine_name`] }">
 					<span class="text-red-500 text-xs">{{ errors[`vaccinations[${index}].vaccine_name`] }}</span>
@@ -140,7 +140,7 @@ const fetchVaccinations = async () => {
 				<div class="col-span-12 md:col-span-6 lg:col-span-2">
 					<label for="batch_number" class="mb-2 block text-sm font-medium text-gray-500">Серийный номер</label>
 					<input v-model="vaccination.batch_number" name="batch_number" id="batch_number"
-						placeholder="Batch Number"
+						placeholder="Cерийный номер"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`vaccinations[${index}].batch_number`] }">
 					<span class="text-red-500 text-xs">{{ errors[`vaccinations[${index}].batch_number`] }}</span>
@@ -159,7 +159,7 @@ const fetchVaccinations = async () => {
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-3">
 					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">Примечания</label>
-					<textarea v-model="vaccination.notes" name="notes" id="notes" placeholder="О себе" rows="5"
+					<textarea v-model="vaccination.notes" name="notes" id="notes" placeholder="Описание" rows="5"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`vaccinations[${index}].notes`] }"></textarea>
 					<span class="text-red-500 text-xs">{{ errors[`vaccinations[${index}].notes`] }}</span>

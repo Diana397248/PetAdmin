@@ -240,7 +240,7 @@ onMounted(async () => {
                         <input v-model="editForm.name" type="text" id="name"
                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
                                :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-500': errors.name }"
-                               placeholder="Pet Name"/>
+                               placeholder="Имя питомца"/>
                         <div v-if="errors.name" class="text-sm text-red-500 mt-1">
                             {{ errors.name }}
                         </div>

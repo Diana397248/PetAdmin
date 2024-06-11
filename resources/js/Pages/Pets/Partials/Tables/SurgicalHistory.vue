@@ -21,11 +21,11 @@ const props = defineProps({
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
-            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Procedure Name
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Название процедуры
             </th>
             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Дата</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Surgeon</th>
-            <th scope="col" class="py-3.5 text-right text-sm font-semibold text-gray-900">О себе</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Врач хирург</th>
+            <th scope="col" class="py-3.5 text-right text-sm font-semibold text-gray-900">Описание</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">

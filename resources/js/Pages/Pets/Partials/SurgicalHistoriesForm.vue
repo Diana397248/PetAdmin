@@ -124,9 +124,9 @@ const fetchSurgeries = async () => {
 
 			<div v-for="(surgery, index) in surgeriesForm" :key="index" class="grid grid-cols-12 gap-5 mb-5 p-5">
 				<div class=" col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="procedure_name" class="mb-2 block text-sm font-medium text-gray-500">Procedure Name</label>
+					<label for="procedure_name" class="mb-2 block text-sm font-medium text-gray-500">Название процедуры</label>
 					<input v-model="surgery.procedure_name" name="procedure_name" id="procedure_name"
-						placeholder="Procedure Name"
+						placeholder="Название процедуры"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`surgeries[${index}].procedure_name`] }">
 					<span class="text-red-500 text-xs">{{ errors[`surgeries[${index}].procedure_name`] }}</span>
@@ -141,16 +141,16 @@ const fetchSurgeries = async () => {
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="treatment" class="mb-2 block text-sm font-medium text-gray-500">Surgeon</label>
-					<input v-model="surgery.surgeon" name="surgeon" id="surgeon" placeholder="Surgeon"
+					<label for="treatment" class="mb-2 block text-sm font-medium text-gray-500">Врач хирург</label>
+					<input v-model="surgery.surgeon" name="surgeon" id="surgeon" placeholder="Врач хирург"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`surgeries[${index}].surgeon`] }">
 					<span class="text-red-500 text-xs">{{ errors[`surgeries[${index}].surgeon`] }}</span>
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-5">
-					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">О себе</label>
-					<textarea v-model="surgery.notes" name="notes" id="notes" placeholder="О себе" rows="5"
+					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">Описание</label>
+					<textarea v-model="surgery.notes" name="notes" id="notes" placeholder="Описание" rows="5"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`surgeries[${index}].notes`] }">
 					</textarea>
