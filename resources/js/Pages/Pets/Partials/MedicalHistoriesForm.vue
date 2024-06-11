@@ -125,15 +125,15 @@ const fetchHistories = async () => {
 
 			<div v-for="(history, index) in historiesForm" :key="index" class="grid grid-cols-12 gap-5 mb-5 p-5">
 				<div class=" col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="vaccine_name" class="mb-2 block text-sm font-medium text-gray-500">Condition</label>
-					<input v-model="history.condition" name="condition" id="condition" placeholder="Condition"
+					<label for="vaccine_name" class="mb-2 block text-sm font-medium text-gray-500">Состояние</label>
+					<input v-model="history.condition" name="condition" id="condition" placeholder="Состояние"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`histories[${index}].condition`] }">
 					<span class="text-red-500 text-xs">{{ errors[`histories[${index}].condition`] }}</span>
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="diagnosis_date" class="mb-2 block text-sm font-medium text-gray-500">Diagnosis Date</label>
+					<label for="diagnosis_date" class="mb-2 block text-sm font-medium text-gray-500">Дата диагноза</label>
 					<input type="date" v-model="history.diagnosis_date"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`histories[${index}].diagnosis_date`] }">
@@ -141,8 +141,8 @@ const fetchHistories = async () => {
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="treatment" class="mb-2 block text-sm font-medium text-gray-500">Treatment</label>
-					<input v-model="history.treatment" name="treatment" id="treatment" placeholder="Treatment"
+					<label for="treatment" class="mb-2 block text-sm font-medium text-gray-500">Уход</label>
+					<input v-model="history.treatment" name="treatment" id="treatment" placeholder="Уход"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`histories[${index}].treatment`] }">
 					<span class="text-red-500 text-xs">{{ errors[`histories[${index}].treatment`] }}</span>

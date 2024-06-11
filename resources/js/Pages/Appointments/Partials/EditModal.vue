@@ -210,7 +210,7 @@ onMounted(async () => {
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="start_time"
                                                class="block mb-2 text-xs font-medium text-gray-500 dark:text-white">Start
-                                            Date</label>
+                                            Дата</label>
                                         <input v-model="editForm.start_time" type="datetime-local" name="start_time"
                                                id="start_time"
                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
@@ -222,7 +222,7 @@ onMounted(async () => {
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="end_time"
                                                class="block mb-2 text-xs font-medium text-gray-500 dark:text-white">End
-                                            Date</label>
+                                            Дата</label>
                                         <input v-model="editForm.end_time" type="datetime-local" name="end_time"
                                                id="end_time"
                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"

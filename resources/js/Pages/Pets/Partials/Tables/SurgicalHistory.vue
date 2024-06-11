@@ -23,7 +23,7 @@ const props = defineProps({
           <tr>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Procedure Name
             </th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Дата</th>
             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Surgeon</th>
             <th scope="col" class="py-3.5 text-right text-sm font-semibold text-gray-900">О себе</th>
           </tr>

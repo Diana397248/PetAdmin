@@ -133,7 +133,7 @@ const fetchSurgeries = async () => {
 				</div>
 
 				<div class="col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="date" class="mb-2 block text-sm font-medium text-gray-500">Date</label>
+					<label for="date" class="mb-2 block text-sm font-medium text-gray-500">Дата</label>
 					<input type="date" v-model="surgery.date"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`surgeries[${index}].date`] }">

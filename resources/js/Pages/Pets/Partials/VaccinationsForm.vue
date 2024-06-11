@@ -150,7 +150,7 @@ const fetchVaccinations = async () => {
 					<label for="administering_veterinarian"
 						class="mb-2 block text-sm font-medium text-gray-500">Главный ветеринар</label>
 					<input v-model="vaccination.administering_veterinarian" name="administering_veterinarian"
-						id="administering_veterinarian" placeholder="Administering Veterinarian"
+						id="administering_veterinarian" placeholder="Главный ветеринар"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
 						:class="{ 'border-red-500': errors[`vaccinations[${index}].administering_veterinarian`] }">
 					<span
