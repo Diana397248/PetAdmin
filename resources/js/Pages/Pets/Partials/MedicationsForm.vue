@@ -4,6 +4,7 @@ import { usePage } from '@inertiajs/vue3'
 import { useToast } from "vue-toastification"
 import { PlusIcon, TrashIcon } from "@heroicons/vue/24/outline/index.js";
 import { validateForm, watchFields, errors } from '@/Validation/Pets/Medications/Index';
+import DoctorSelect from '@/Components/DoctorSelect.vue';
 import moment from 'moment';
 
 const isSubmitting = ref(false)
@@ -148,7 +149,7 @@ const fetchMedications = async () => {
 					<span class="text-red-500 text-xs">{{ errors[`medications[${index}].medication_name`] }}</span>
 				</div>
 
-				<div class="col-span-12 md:col-span-6 lg:col-span-2">
+				<div class="col-span-12 md:col-span-5 lg:col-span-2">
 					<label for="administered_at" class="mb-2 block text-sm font-medium text-gray-500">Дата</label>
 					<input type="date" v-model="medication.administered_at"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
@@ -172,17 +173,12 @@ const fetchMedications = async () => {
 					<span class="text-red-500 text-xs">{{ errors[`medications[${index}].frequency`] }}</span>
 				</div>
 
-				<div class="col-span-12 md:col-span-6 lg:col-span-2">
-					<label for="administering_veterinarian"
-						class="mb-2 block text-sm font-medium text-gray-500">Главный ветеринар</label>
-					<input v-model="medication.administering_veterinarian" name="administering_veterinarian" id="frequency"
-						placeholder="Главный ветеринар"
-						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
-						:class="{ 'border-red-500': errors[`medications[${index}].administering_veterinarian`] }">
-					<span class="text-red-500 text-xs">{{ errors[`medications[${index}].administering_veterinarian`] }}</span>
+				<div class="col-span-12 md:col-span-8 lg:col-span-3">
+                    <DoctorSelect v-model="medication.administering_veterinarian"/>
+                   <span class="text-red-500 text-xs">{{ errors[`medications[${index}].administering_veterinarian`] }}</span>
 				</div>
 
-				<div class="col-span-12 md:col-span-6 lg:col-span-3">
+				<div class="col-span-12 md:col-span-6 lg:col-span-2">
 					<label for="notes" class="mb-2 block text-sm font-medium text-gray-500">Описание</label>
 					<textarea v-model="medication.notes" name="notes" id="notes" placeholder="Описание" rows="5"
 						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 placeholder:text-sm"
