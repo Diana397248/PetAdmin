@@ -19,7 +19,7 @@
                         </v-col>
 
                         <v-col class="d-flex flex-column justify-content-between">
-                            <Field label="питомец" text="Тори"/>
+                            <Field label="питомец" :text="appDate.pet.name"/>
                             <!--                TODO:            <Field label="питомец" :text="props.appointment.pet.name"/>-->
                             <Field label="дата" :text="appDate.toLocaleDateString()"/>
                             <Field label="время" :text="appDate.toLocaleTimeString([], {
