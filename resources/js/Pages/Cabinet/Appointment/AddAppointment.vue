@@ -33,9 +33,20 @@
 
 
                             <v-row>
+                                <v-col cols="5"
+                                       class="mt-5 mr-2"
+                                       style="height: 55px">
+                                    <v-select
+                                        label="ветеринар"
+                                        v-model="selectedVetID"
+                                        :items="allVets"
+                                        item-title="user.name"
+                                        item-value="id"
+                                    ></v-select>
+                                </v-col>
                                 <v-col
-                                    cols="12"
-                                    class="d-flex justify-center"
+                                    cols=""
+                                    class="d-flex justify-center mt-5 ml-2"
                                 >
                                     <input v-model="model.date" type="datetime-local" name="start_time"
                                            style="background-color: #F6F5F6; height: 55px"
@@ -136,11 +147,23 @@
 import {toast} from "vue3-toastify";
 
 import ClientLayout from "@/Layouts/ClientLayout.vue"
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {router} from "@inertiajs/vue3";
 
 const valid = ref(false);
+const selectedVetID = ref(1);
+const allVets = ref([]);
 
+onMounted(() => {
+    fetchAllVets()
+})
+
+
+const fetchAllVets = async () => {
+    const response = await axios.get('/appointments/fetchAllVets');
+    allVets.value = response.data;
+    selectedVetID.value = 1
+}
 const submitAppointmentForm = async () => {
     // validateForm(createForm);
 
@@ -150,7 +173,7 @@ const submitAppointmentForm = async () => {
     // }
 
     const formData = {
-        vet_id: 1,
+        vet_id: selectedVetID.value || 1,
         start_time: model.date,
         description: model.desc,
         firstname: "",
@@ -236,6 +259,6 @@ const model = reactive({
 
 <style scoped>
 .text-area-description:deep(textarea) {
-    padding: 15px 10px 0!important;
+    padding: 15px 10px 0 !important;
 }
 </style>
