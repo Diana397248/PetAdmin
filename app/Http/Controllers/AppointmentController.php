@@ -31,9 +31,11 @@ class AppointmentController extends Controller
         ], 201);
     }
 
-    public function fetchAllAppointments() {
-        $appointments = $this->appointmentService->fetchAllAppointments();
-
+    public function fetchAllAppointments(Request $request) {
+        $appointments = $this->appointmentService->fetchAllAppointments(false);
+        if ($request->has('all')) {
+            $appointments = $this->appointmentService->fetchAllAppointments(true);
+        }
         return response()->json($appointments, 201);
     }
 

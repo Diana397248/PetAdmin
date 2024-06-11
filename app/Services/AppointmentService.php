@@ -21,10 +21,11 @@ class AppointmentService
         return Appointment::create($data);
     }
 
-    public function fetchAllAppointments()
+    public function fetchAllAppointments(bool $all)
     {
         $appointmentQuery = Appointment::with('client', 'vet', 'vet.user');
-        if (Auth::user()->role === 'client') {
+
+        if (!$all && Auth::user()->role === 'client') {
             $client = Client::where('user_id', Auth::user()->id)->first();
             if ($client) {
                 $appointmentQuery = $appointmentQuery->where('client_id', $client->id);

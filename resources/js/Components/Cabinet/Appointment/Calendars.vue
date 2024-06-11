@@ -57,7 +57,7 @@ const routeToAddAppointment = ()=> {
 }
 
 const fetchAllAppointments = async () => {
-    const response = await axios.get('/appointments/fetchAllAppointments');
+    const response = await axios.get('/appointments/fetchAllAppointments?all');
     events.value = response.data.map((appointment) => {
         let end = new Date(appointment.start_time);
         return ({
