@@ -262,6 +262,7 @@ const fetchBreeds = async (speciesId) => {
                     <div class="col-span-4 sm:col-span-2">
                         <label for="age" class="mb-2 block text-sm font-medium text-gray-700">Возраст</label>
                         <input v-model="createForm.age" type="number" id="age"
+                               min="1" max="100"
                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
                                placeholder="1"/>
                     </div>
